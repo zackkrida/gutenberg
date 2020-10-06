@@ -188,7 +188,6 @@ register_block_pattern(
 add_action(
 	'init',
 	function() {
-
 		$core_block_patterns = array(
 			'text-two-columns',
 			'two-buttons',
@@ -202,24 +201,6 @@ add_action(
 			'quote',
 		);
 
-		$new_core_block_patterns = array(
-			'media-text-nature',
-			'two-images-gallery',
-			'three-columns-media-text',
-			'quote',
-			'large-header-left',
-			'large-header-text-button',
-			'media-text-art',
-			'text-two-columns-title',
-			'three-columns-text',
-			'text-two-columns-title-offset',
-			'heading',
-			'three-images-gallery',
-			'text-two-columns',
-			'media-text-arquitecture',
-			'two-buttons',
-		);
-
 		if ( ! function_exists( 'unregister_block_pattern' ) ) {
 			return;
 		}
@@ -228,12 +209,16 @@ add_action(
 			unregister_block_pattern( 'core/' . $core_block_pattern );
 		}
 
-		foreach ( $new_core_block_patterns as $core_block_pattern ) {
-			register_block_pattern(
-				'core/' . $core_block_pattern,
-				require __DIR__ . '/block-patterns/' . $core_block_pattern . '.php'
-			);
+		$request = new WP_REST_Request( 'GET', '/__experimental/pattern-directory/patterns' );
+		$request->set_param( 'keyword', 11 ); // 11 is the ID for "core".
+		$response = rest_do_request( $request );
+		if ( $response->is_error() ) {
+			return;
 		}
-
+		$patterns = $response->get_data();
+		foreach ( $patterns as $settings ) {
+			$pattern_name = 'core/' . sanitize_title( $settings['title'] );
+			register_block_pattern( $pattern_name, (array) $settings );
+		}
 	}
 );
