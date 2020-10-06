@@ -3,14 +3,6 @@
 	"name": "core/quote",
 	"category": "text",
 	"attributes": {
-		"value": {
-			"type": "string",
-			"source": "html",
-			"selector": "blockquote",
-			"multiline": "p",
-			"default": "",
-			"__experimentalRole": "content"
-		},
 		"citation": {
 			"type": "string",
 			"source": "html",
