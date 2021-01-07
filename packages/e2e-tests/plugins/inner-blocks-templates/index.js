@@ -1,10 +1,9 @@
-(function () {
-	var registerBlockType = wp.blocks.registerBlockType;
-	var createBlock = wp.blocks.createBlock;
-	var el = wp.element.createElement;
-	var InnerBlocks = wp.blockEditor.InnerBlocks;
-	var __ = wp.i18n.__;
-	var TEMPLATE = [
+( function () {
+	const registerBlockType = wp.blocks.registerBlockType;
+	const createBlock = wp.blocks.createBlock;
+	const el = wp.element.createElement;
+	const InnerBlocks = wp.blockEditor.InnerBlocks;
+	const TEMPLATE = [
 		[
 			'core/paragraph',
 			{
@@ -14,7 +13,7 @@
 		],
 	];
 
-	var TEMPLATE_PARAGRAPH_PLACEHOLDER = [
+	const TEMPLATE_PARAGRAPH_PLACEHOLDER = [
 		[
 			'core/paragraph',
 			{
@@ -24,7 +23,7 @@
 		],
 	];
 
-	var TEMPLATE_TWO_PARAGRAPHS = [
+	const TEMPLATE_TWO_PARAGRAPHS = [
 		[
 			'core/paragraph',
 			{
@@ -41,40 +40,40 @@
 		],
 	];
 
-	var save = function () {
-		return el(InnerBlocks.Content);
+	const save = function () {
+		return el( InnerBlocks.Content );
 	};
 
-	registerBlockType('test/test-inner-blocks-no-locking', {
+	registerBlockType( 'test/test-inner-blocks-no-locking', {
 		title: 'Test Inner Blocks no locking',
 		icon: 'cart',
 		category: 'text',
 
-		edit: function (props) {
-			return el(InnerBlocks, {
+		edit() {
+			return el( InnerBlocks, {
 				template: TEMPLATE,
-			});
+			} );
 		},
 
 		save,
-	});
+	} );
 
-	registerBlockType('test/test-inner-blocks-locking-all', {
+	registerBlockType( 'test/test-inner-blocks-locking-all', {
 		title: 'Test InnerBlocks locking all',
 		icon: 'cart',
 		category: 'text',
 
-		edit: function (props) {
-			return el(InnerBlocks, {
+		edit() {
+			return el( InnerBlocks, {
 				template: TEMPLATE,
 				templateLock: 'all',
-			});
+			} );
 		},
 
 		save,
-	});
+	} );
 
-	registerBlockType('test/test-inner-blocks-update-locked-template', {
+	registerBlockType( 'test/test-inner-blocks-update-locked-template', {
 		title: 'Test Inner Blocks update locked template',
 		icon: 'cart',
 		category: 'text',
@@ -86,44 +85,46 @@
 			},
 		},
 
-		edit: function (props) {
+		edit( props ) {
 			const hasUpdatedTemplated = props.attributes.hasUpdatedTemplate;
-			return el(
-				'div',
-				null,
-				[
-					el('button', {
+			return el( 'div', null, [
+				el(
+					'button',
+					{
 						onClick() {
-							props.setAttributes({ hasUpdatedTemplate: true })
-						}
-					}, 'Update template'),
-					el(InnerBlocks, {
-						template: hasUpdatedTemplated ? TEMPLATE_TWO_PARAGRAPHS : TEMPLATE,
-						templateLock: 'all',
-					})
-				]
-			);
+							props.setAttributes( { hasUpdatedTemplate: true } );
+						},
+					},
+					'Update template'
+				),
+				el( InnerBlocks, {
+					template: hasUpdatedTemplated
+						? TEMPLATE_TWO_PARAGRAPHS
+						: TEMPLATE,
+					templateLock: 'all',
+				} ),
+			] );
 		},
 
 		save,
-	});
+	} );
 
-	registerBlockType('test/test-inner-blocks-paragraph-placeholder', {
+	registerBlockType( 'test/test-inner-blocks-paragraph-placeholder', {
 		title: 'Test Inner Blocks Paragraph Placeholder',
 		icon: 'cart',
 		category: 'text',
 
-		edit: function (props) {
-			return el(InnerBlocks, {
+		edit() {
+			return el( InnerBlocks, {
 				template: TEMPLATE_PARAGRAPH_PLACEHOLDER,
 				templateInsertUpdatesSelection: true,
-			});
+			} );
 		},
 
 		save,
-	});
+	} );
 
-	registerBlockType('test/test-inner-blocks-transformer-target', {
+	registerBlockType( 'test/test-inner-blocks-transformer-target', {
 		title: 'Test Inner Blocks transformer target',
 		icon: 'cart',
 		category: 'text',
@@ -138,7 +139,7 @@
 						'test/test-inner-blocks-locking-all',
 						'test/test-inner-blocks-paragraph-placeholder',
 					],
-					transform: function (attributes, innerBlocks) {
+					transform( attributes, innerBlocks ) {
 						return createBlock(
 							'test/test-inner-blocks-transformer-target',
 							attributes,
@@ -150,8 +151,8 @@
 			to: [
 				{
 					type: 'block',
-					blocks: ['test/i-dont-exist'],
-					transform: function (attributes, innerBlocks) {
+					blocks: [ 'test/i-dont-exist' ],
+					transform( attributes, innerBlocks ) {
 						return createBlock(
 							'test/test-inner-blocks-transformer-target',
 							attributes,
@@ -162,12 +163,12 @@
 			],
 		},
 
-		edit: function (props) {
-			return el(InnerBlocks, {
+		edit() {
+			return el( InnerBlocks, {
 				template: TEMPLATE,
-			});
+			} );
 		},
 
 		save,
-	});
-})();
+	} );
+} )();
