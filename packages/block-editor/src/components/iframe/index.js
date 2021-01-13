@@ -158,7 +158,12 @@ function Iframe( { contentRef, children, head, ...props }, ref ) {
 			styleSheetsCompat( contentDocument );
 			bubbleEvents( contentDocument );
 			setBodyClassName( contentDocument );
-			contentRef.current = contentDocument.body;
+
+			if ( typeof contentRef === 'function' ) {
+				contentRef( contentDocument.body );
+			} else if ( contentRef ) {
+				contentRef.current = contentDocument.body;
+			}
 
 			return true;
 		}
