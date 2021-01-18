@@ -165,13 +165,15 @@ ServerSideRender.defaultProps = {
 	LoadingResponsePlaceholder: ( { children } ) => {
 		return (
 			<div style={ { position: 'relative' } }>
-				<Spinner
+				<div
 					style={ {
 						position: 'absolute',
 						top: '10px',
 						right: '0',
 					} }
-				/>
+				>
+					<Spinner />
+				</div>
 				{ children }
 			</div>
 		);
