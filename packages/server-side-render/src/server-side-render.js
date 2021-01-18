@@ -1,12 +1,12 @@
 /**
  * External dependencies
  */
-import { isEqual, debounce } from 'lodash';
+import { debounce } from 'lodash';
 
 /**
  * WordPress dependencies
  */
-import { Component, RawHTML } from '@wordpress/element';
+import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
 import { addQueryArgs } from '@wordpress/url';
@@ -20,49 +20,42 @@ export function rendererPath( block, attributes = null, urlQueryArgs = {} ) {
 	} );
 }
 
-export class ServerSideRender extends Component {
-	constructor( props ) {
-		super( props );
-		this.state = {
-			response: null,
-			prevResponse: null,
+export function ServerSideRender( props ) {
+	const {
+		className,
+		EmptyResponsePlaceholder,
+		ErrorResponsePlaceholder,
+		LoadingResponsePlaceholder,
+	} = props;
+
+	const [ response, setResponse ] = useState( null );
+	const [ isLoading, setIsLoading ] = useState( false );
+	const isMounted = useRef( true );
+
+	useEffect( () => {
+		fetchData( props );
+
+		fetchData = debounce( fetchData, 500 );
+		return () => {
+			isMounted.current = false;
 		};
-	}
+	}, [] );
 
-	componentDidMount() {
-		this.isStillMounted = true;
-		this.fetch( this.props );
-		// Only debounce once the initial fetch occurs to ensure that the first
-		// renders show data as soon as possible.
-		this.fetch = debounce( this.fetch, 500 );
-	}
+	useEffect( () => {
+		fetchData( props );
+	}, [ props ] );
 
-	componentWillUnmount() {
-		this.isStillMounted = false;
-	}
-
-	componentDidUpdate( prevProps ) {
-		if ( ! isEqual( prevProps, this.props ) ) {
-			this.fetch( this.props );
-		}
-	}
-
-	fetch( props ) {
-		if ( ! this.isStillMounted ) {
+	function fetchData( options ) {
+		if ( ! isMounted ) {
 			return;
 		}
-		if ( null !== this.state.response ) {
-			this.setState( ( state ) => ( {
-				response: null,
-				prevResponse: state.response,
-			} ) );
-		}
+		setIsLoading( true );
 		const {
 			block,
 			attributes = null,
 			httpMethod = 'GET',
 			urlQueryArgs = {},
-		} = props;
+		} = options;
 
 		// If httpMethod is 'POST', send the attributes in the request body instead of the URL.
 		// This allows sending a larger attributes object than in a GET request, where the attributes are in the URL.
@@ -70,79 +63,58 @@ export class ServerSideRender extends Component {
 		const urlAttributes = isPostRequest ? null : attributes;
 		const path = rendererPath( block, urlAttributes, urlQueryArgs );
 		const data = isPostRequest ? { attributes } : null;
+		let currentFetchRequest = null;
 
 		// Store the latest fetch request so that when we process it, we can
 		// check if it is the current request, to avoid race conditions on slow networks.
-		const fetchRequest = ( this.currentFetchRequest = apiFetch( {
+		const fetchRequest = ( currentFetchRequest = apiFetch( {
 			path,
 			data,
 			method: isPostRequest ? 'POST' : 'GET',
 		} )
-			.then( ( response ) => {
+			.then( ( fetchResponse ) => {
 				if (
-					this.isStillMounted &&
-					fetchRequest === this.currentFetchRequest &&
-					response
+					isMounted &&
+					fetchRequest === currentFetchRequest &&
+					fetchResponse
 				) {
-					this.setState( { response: response.rendered } );
+					setResponse( fetchResponse.rendered );
+					setIsLoading( false );
 				}
 			} )
 			.catch( ( error ) => {
-				if (
-					this.isStillMounted &&
-					fetchRequest === this.currentFetchRequest
-				) {
-					this.setState( {
-						response: {
-							error: true,
-							errorMsg: error.message,
-						},
+				if ( isMounted && fetchRequest === currentFetchRequest ) {
+					setResponse( {
+						error: true,
+						errorMsg: error.message,
 					} );
+					setIsLoading( false );
 				}
 			} ) );
 		return fetchRequest;
 	}
 
-	render() {
-		const response = this.state.response;
-		const prevResponse = this.state.prevResponse;
-		const {
-			className,
-			EmptyResponsePlaceholder,
-			ErrorResponsePlaceholder,
-			LoadingResponsePlaceholder,
-		} = this.props;
-
-		if ( response === '' ) {
-			return (
-				<EmptyResponsePlaceholder
-					response={ response }
-					{ ...this.props }
-				/>
-			);
-		} else if ( ! response ) {
-			return (
-				<LoadingResponsePlaceholder>
-					<RawHTML key="html" className={ className }>
-						{ prevResponse }
-					</RawHTML>
-				</LoadingResponsePlaceholder>
-			);
-		} else if ( response.error ) {
-			return (
-				<ErrorResponsePlaceholder
-					response={ response }
-					{ ...this.props }
-				/>
-			);
-		}
-
+	if ( response === '' ) {
+		return <EmptyResponsePlaceholder response={ response } { ...props } />;
+	}
+	if ( isLoading ) {
 		return (
-			<RawHTML key="html" className={ className }>
-				{ response }
-			</RawHTML>
+			<LoadingResponsePlaceholder>
+				<RawHTML key="html" className={ className }>
+					{ response }
+				</RawHTML>
+			</LoadingResponsePlaceholder>
 		);
 	}
+	if ( response?.error ) {
+		return <ErrorResponsePlaceholder response={ response } { ...props } />;
+	}
+
+	return (
+		<RawHTML key="html" className={ className }>
+			{ response }
+		</RawHTML>
+	);
 }
 
 ServerSideRender.defaultProps = {
