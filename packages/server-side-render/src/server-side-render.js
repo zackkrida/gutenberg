@@ -25,6 +25,7 @@ export class ServerSideRender extends Component {
 		super( props );
 		this.state = {
 			response: null,
+			prevResponse: null,
 		};
 	}
 
@@ -51,7 +52,10 @@ export class ServerSideRender extends Component {
 			return;
 		}
 		if ( null !== this.state.response ) {
-			this.setState( { response: null } );
+			this.setState( ( state ) => ( {
+				response: null,
+				prevResponse: state.response,
+			} ) );
 		}
 		const {
 			block,
@@ -101,6 +105,7 @@ export class ServerSideRender extends Component {
 
 	render() {
 		const response = this.state.response;
+		const prevResponse = this.state.prevResponse;
 		const {
 			className,
 			EmptyResponsePlaceholder,
@@ -117,10 +122,11 @@ export class ServerSideRender extends Component {
 			);
 		} else if ( ! response ) {
 			return (
-				<LoadingResponsePlaceholder
-					response={ response }
-					{ ...this.props }
-				/>
+				<LoadingResponsePlaceholder>
+					<RawHTML key="html" className={ className }>
+						{ prevResponse }
+					</RawHTML>
+				</LoadingResponsePlaceholder>
 			);
 		} else if ( response.error ) {
 			return (
@@ -140,6 +146,7 @@ export class ServerSideRender extends Component {
 }
 
 ServerSideRender.defaultProps = {
+	spinnerLocation: { right: 0, top: 10, unit: 'px' },
 	EmptyResponsePlaceholder: ( { className } ) => (
 		<Placeholder className={ className }>
 			{ __( 'Block rendered as empty.' ) }
@@ -155,11 +162,18 @@ ServerSideRender.defaultProps = {
 			<Placeholder className={ className }>{ errorMessage }</Placeholder>
 		);
 	},
-	LoadingResponsePlaceholder: ( { className } ) => {
+	LoadingResponsePlaceholder: ( { children } ) => {
 		return (
-			<Placeholder className={ className }>
-				<Spinner />
-			</Placeholder>
+			<div style={ { position: 'relative' } }>
+				<Spinner
+					style={ {
+						position: 'absolute',
+						top: '10px',
+						right: '0',
+					} }
+				/>
+				{ children }
+			</div>
 		);
 	},
 };
