@@ -103,9 +103,7 @@ export function ServerSideRender( props ) {
 	if ( isLoading ) {
 		return (
 			<LoadingResponsePlaceholder>
-				<RawHTML key="html" className={ className }>
-					{ response }
-				</RawHTML>
+				<RawHTML className={ className }>{ response }</RawHTML>
 			</LoadingResponsePlaceholder>
 		);
 	}
@@ -113,11 +111,7 @@ export function ServerSideRender( props ) {
 		return <ErrorResponsePlaceholder response={ response } { ...props } />;
 	}
 
-	return (
-		<RawHTML key="html" className={ className }>
-			{ response }
-		</RawHTML>
-	);
+	return <RawHTML className={ className }>{ response }</RawHTML>;
 }
 
 ServerSideRender.defaultProps = {
