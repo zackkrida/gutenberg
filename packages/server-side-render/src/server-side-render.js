@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { debounce } from 'lodash';
+import { debounce, isEqual } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -10,6 +10,7 @@ import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
 import { addQueryArgs } from '@wordpress/url';
+import { usePrevious } from '@wordpress/compose';
 import { Placeholder, Spinner } from '@wordpress/components';
 
 export function rendererPath( block, attributes = null, urlQueryArgs = {} ) {
@@ -34,7 +35,7 @@ export function ServerSideRender( props ) {
 	let currentFetchRequest = null;
 
 	useEffect( () => {
-		fetchData( props );
+		fetchData();
 
 		fetchData = debounce( fetchData, 500 );
 		return () => {
@@ -45,11 +46,11 @@ export function ServerSideRender( props ) {
 	const prevProps = usePrevious( props );
 	useEffect( () => {
 		if ( ! isEqual( prevProps, props ) ) {
-			fetchData( props );
+			fetchData();
 		}
 	} );
 
-	function fetchData( options ) {
+	function fetchData() {
 		if ( ! isMounted.current ) {
 			return;
 		}
@@ -59,7 +60,7 @@ export function ServerSideRender( props ) {
 			attributes = null,
 			httpMethod = 'GET',
 			urlQueryArgs = {},
-		} = options;
+		} = props;
 
 		// If httpMethod is 'POST', send the attributes in the request body instead of the URL.
 		// This allows sending a larger attributes object than in a GET request, where the attributes are in the URL.
