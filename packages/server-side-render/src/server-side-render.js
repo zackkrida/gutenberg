@@ -119,7 +119,6 @@ export function ServerSideRender( props ) {
 }
 
 ServerSideRender.defaultProps = {
-	spinnerLocation: { right: 0, top: 10, unit: 'px' },
 	EmptyResponsePlaceholder: ( { className } ) => (
 		<Placeholder className={ className }>
 			{ __( 'Block rendered as empty.' ) }
