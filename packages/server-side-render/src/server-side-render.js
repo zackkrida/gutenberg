@@ -42,9 +42,12 @@ export function ServerSideRender( props ) {
 		};
 	}, [] );
 
+	const prevProps = usePrevious( props );
 	useEffect( () => {
-		fetchData( props );
-	}, [ props ] );
+		if ( ! isEqual( prevProps, props ) ) {
+			fetchData( props );
+		}
+	} );
 
 	function fetchData( options ) {
 		if ( ! isMounted.current ) {
