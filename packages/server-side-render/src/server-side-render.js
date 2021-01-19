@@ -31,6 +31,7 @@ export function ServerSideRender( props ) {
 	const [ response, setResponse ] = useState( null );
 	const [ isLoading, setIsLoading ] = useState( false );
 	const isMounted = useRef( true );
+	let currentFetchRequest = null;
 
 	useEffect( () => {
 		fetchData( props );
@@ -46,7 +47,7 @@ export function ServerSideRender( props ) {
 	}, [ props ] );
 
 	function fetchData( options ) {
-		if ( ! isMounted ) {
+		if ( ! isMounted.current ) {
 			return;
 		}
 		setIsLoading( true );
@@ -63,7 +64,6 @@ export function ServerSideRender( props ) {
 		const urlAttributes = isPostRequest ? null : attributes;
 		const path = rendererPath( block, urlAttributes, urlQueryArgs );
 		const data = isPostRequest ? { attributes } : null;
-		let currentFetchRequest = null;
 
 		// Store the latest fetch request so that when we process it, we can
 		// check if it is the current request, to avoid race conditions on slow networks.
@@ -74,7 +74,7 @@ export function ServerSideRender( props ) {
 		} )
 			.then( ( fetchResponse ) => {
 				if (
-					isMounted &&
+					isMounted.current &&
 					fetchRequest === currentFetchRequest &&
 					fetchResponse
 				) {
@@ -83,7 +83,10 @@ export function ServerSideRender( props ) {
 				}
 			} )
 			.catch( ( error ) => {
-				if ( isMounted && fetchRequest === currentFetchRequest ) {
+				if (
+					isMounted.current &&
+					fetchRequest === currentFetchRequest
+				) {
 					setResponse( {
 						error: true,
 						errorMsg: error.message,
