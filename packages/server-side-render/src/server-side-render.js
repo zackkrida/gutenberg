@@ -24,9 +24,9 @@ export function rendererPath( block, attributes = null, urlQueryArgs = {} ) {
 export function ServerSideRender( props ) {
 	const {
 		className,
-		EmptyResponsePlaceholder,
-		ErrorResponsePlaceholder,
-		LoadingResponsePlaceholder,
+		EmptyResponsePlaceholder = DefaultEmptyResponsePlaceholder,
+		ErrorResponsePlaceholder = DefaultErrorResponsePlaceholder,
+		LoadingResponsePlaceholder = DefaultLoadingResponsePlaceholder,
 	} = props;
 
 	const [ response, setResponse ] = useState( null );
@@ -118,38 +118,38 @@ export function ServerSideRender( props ) {
 	return <RawHTML className={ className }>{ response }</RawHTML>;
 }
 
-ServerSideRender.defaultProps = {
-	EmptyResponsePlaceholder: ( { className } ) => (
+export function DefaultEmptyResponsePlaceholder( { className } ) {
+	return (
 		<Placeholder className={ className }>
 			{ __( 'Block rendered as empty.' ) }
 		</Placeholder>
-	),
-	ErrorResponsePlaceholder: ( { response, className } ) => {
-		const errorMessage = sprintf(
-			// translators: %s: error message describing the problem
-			__( 'Error loading block: %s' ),
-			response.errorMsg
-		);
-		return (
-			<Placeholder className={ className }>{ errorMessage }</Placeholder>
-		);
-	},
-	LoadingResponsePlaceholder: ( { children } ) => {
-		return (
-			<div style={ { position: 'relative' } }>
-				<div
-					style={ {
-						position: 'absolute',
-						top: '10px',
-						right: '0',
-					} }
-				>
-					<Spinner />
-				</div>
-				{ children }
+	);
+}
+
+export function DefaultErrorResponsePlaceholder( { response, className } ) {
+	const errorMessage = sprintf(
+		// translators: %s: error message describing the problem
+		__( 'Error loading block: %s' ),
+		response.errorMsg
+	);
+	return <Placeholder className={ className }>{ errorMessage }</Placeholder>;
+}
+
+export function DefaultLoadingResponsePlaceholder( { children } ) {
+	return (
+		<div style={ { position: 'relative' } }>
+			<div
+				style={ {
+					position: 'absolute',
+					top: '10px',
+					right: '0',
+				} }
+			>
+				<Spinner />
 			</div>
-		);
-	},
-};
+			{ children }
+		</div>
+	);
+}
 
 export default ServerSideRender;
