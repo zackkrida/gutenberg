@@ -32,7 +32,7 @@ export function ServerSideRender( props ) {
 	const [ response, setResponse ] = useState( null );
 	const [ isLoading, setIsLoading ] = useState( false );
 	const isMounted = useRef( true );
-	let currentFetchRequest = null;
+	const fetchRequestRef = useRef( null );
 
 	useEffect( () => {
 		fetchData();
@@ -71,7 +71,7 @@ export function ServerSideRender( props ) {
 
 		// Store the latest fetch request so that when we process it, we can
 		// check if it is the current request, to avoid race conditions on slow networks.
-		const fetchRequest = ( currentFetchRequest = apiFetch( {
+		const fetchRequest = ( fetchRequestRef.current = apiFetch( {
 			path,
 			data,
 			method: isPostRequest ? 'POST' : 'GET',
@@ -79,7 +79,7 @@ export function ServerSideRender( props ) {
 			.then( ( fetchResponse ) => {
 				if (
 					isMounted.current &&
-					fetchRequest === currentFetchRequest &&
+					fetchRequest === fetchRequestRef.current &&
 					fetchResponse
 				) {
 					setResponse( fetchResponse.rendered );
@@ -89,7 +89,7 @@ export function ServerSideRender( props ) {
 			.catch( ( error ) => {
 				if (
 					isMounted.current &&
-					fetchRequest === currentFetchRequest
+					fetchRequest === fetchRequestRef.current
 				) {
 					setResponse( {
 						error: true,
