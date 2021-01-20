@@ -21,7 +21,7 @@ export function rendererPath( block, attributes = null, urlQueryArgs = {} ) {
 	} );
 }
 
-export function ServerSideRender( props ) {
+export default function ServerSideRender( props ) {
 	const {
 		className,
 		EmptyResponsePlaceholder = DefaultEmptyResponsePlaceholder,
@@ -118,7 +118,7 @@ export function ServerSideRender( props ) {
 	return <RawHTML className={ className }>{ response }</RawHTML>;
 }
 
-export function DefaultEmptyResponsePlaceholder( { className } ) {
+function DefaultEmptyResponsePlaceholder( { className } ) {
 	return (
 		<Placeholder className={ className }>
 			{ __( 'Block rendered as empty.' ) }
@@ -126,7 +126,7 @@ export function DefaultEmptyResponsePlaceholder( { className } ) {
 	);
 }
 
-export function DefaultErrorResponsePlaceholder( { response, className } ) {
+function DefaultErrorResponsePlaceholder( { response, className } ) {
 	const errorMessage = sprintf(
 		// translators: %s: error message describing the problem
 		__( 'Error loading block: %s' ),
@@ -135,7 +135,7 @@ export function DefaultErrorResponsePlaceholder( { response, className } ) {
 	return <Placeholder className={ className }>{ errorMessage }</Placeholder>;
 }
 
-export function DefaultLoadingResponsePlaceholder( { children } ) {
+function DefaultLoadingResponsePlaceholder( { children } ) {
 	return (
 		<div style={ { position: 'relative' } }>
 			<div
@@ -151,5 +151,3 @@ export function DefaultLoadingResponsePlaceholder( { children } ) {
 		</div>
 	);
 }
-
-export default ServerSideRender;
