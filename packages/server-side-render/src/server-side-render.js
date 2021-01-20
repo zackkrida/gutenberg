@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { debounce, isEqual } from 'lodash';
+import { isEqual } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -10,7 +10,7 @@ import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
 import { addQueryArgs } from '@wordpress/url';
-import { usePrevious } from '@wordpress/compose';
+import { usePrevious, useDebounce } from '@wordpress/compose';
 import { Placeholder, Spinner } from '@wordpress/components';
 
 export function rendererPath( block, attributes = null, urlQueryArgs = {} ) {
@@ -37,7 +37,6 @@ export default function ServerSideRender( props ) {
 	useEffect( () => {
 		fetchData();
 
-		fetchData = debounce( fetchData, 500 );
 		return () => {
 			isMounted.current = false;
 		};
@@ -46,7 +45,7 @@ export default function ServerSideRender( props ) {
 	const prevProps = usePrevious( props );
 	useEffect( () => {
 		if ( ! isEqual( prevProps, props ) ) {
-			fetchData();
+			debouncedFetchData();
 		}
 	} );
 
@@ -100,6 +99,8 @@ export default function ServerSideRender( props ) {
 			} ) );
 		return fetchRequest;
 	}
+
+	const debouncedFetchData = useDebounce( fetchData, 500 );
 
 	if ( response === '' ) {
 		return <EmptyResponsePlaceholder response={ response } { ...props } />;
