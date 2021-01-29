@@ -26,6 +26,7 @@ const FixStyleWebpackPlugin = require( './fix-style-webpack-plugin' );
 
 const isProduction = process.env.NODE_ENV === 'production';
 const mode = isProduction ? 'production' : 'development';
+const DEV_SERVER_PORT = 8887;
 
 const cssLoaders = [
 	{
@@ -88,6 +89,7 @@ const config = {
 		// are used on the same page.
 		// @see https://github.com/WordPress/gutenberg/issues/23607
 		jsonpFunction: getJsonpFunctionIdentifier(),
+		publicPath: `http://localhost:${ DEV_SERVER_PORT }/build/`,
 	},
 	resolve: {
 		alias: {
@@ -223,7 +225,12 @@ const config = {
 		// https://github.com/webpack-contrib/mini-css-extract-plugin/issues/85
 		new FixStyleWebpackPlugin(),
 		// React Fast Refresh.
-		! isProduction && new ReactRefreshWebpackPlugin(),
+		! isProduction &&
+			new ReactRefreshWebpackPlugin( {
+				overlay: {
+					sockPort: DEV_SERVER_PORT,
+				},
+			} ),
 		// WP_NO_EXTERNALS global variable controls whether scripts' assets get
 		// generated, and the default externals set.
 		! process.env.WP_NO_EXTERNALS &&
@@ -244,6 +251,15 @@ if ( ! isProduction ) {
 		use: require.resolve( 'source-map-loader' ),
 		enforce: 'pre',
 	} );
+	config.devServer = {
+		headers: {
+			// Requests come from the WP port.
+			'Access-Control-Allow-Origin': '*',
+		},
+		liveReload: false,
+		port: DEV_SERVER_PORT,
+		writeToDisk: true,
+	};
 }
 
 module.exports = config;
