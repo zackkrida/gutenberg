@@ -49,7 +49,7 @@ async function testGroupKeyboardNavigation(
 	await page.keyboard.press( 'Tab' );
 	await expectLabelToHaveFocus( currentBlockLabel );
 	await pressKeyWithModifier( 'shift', 'Tab' );
-	await expectLabelToHaveFocus( 'Select parent (Group)' );
+	await expectLabelToHaveFocus( 'Select Group' );
 	await page.keyboard.press( 'ArrowRight' );
 	await expectLabelToHaveFocus( currentBlockTitle );
 }
@@ -127,6 +127,13 @@ describe( 'Toolbar roving tabindex', () => {
 		await clickBlockToolbarButton( 'Bold' );
 		await page.keyboard.type( 'a' );
 		await pressKeyWithModifier( 'shift', 'Tab' );
+		await expectLabelToHaveFocus( 'Bold' );
+	} );
+
+	it( 'can reach toolbar items with arrow keys after pressing alt+F10', async () => {
+		await pressKeyWithModifier( 'alt', 'F10' );
+		await page.keyboard.press( 'ArrowRight' );
+		await page.keyboard.press( 'ArrowRight' );
 		await expectLabelToHaveFocus( 'Bold' );
 	} );
 } );

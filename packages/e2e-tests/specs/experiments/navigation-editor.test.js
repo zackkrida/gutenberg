@@ -144,6 +144,7 @@ describe( 'Navigation editor', () => {
 
 	it( 'allows creation of a menu', async () => {
 		const pagesResponse = createMockPages( pagesFixture );
+
 		const menuResponse = {
 			id: 4,
 			description: '',
@@ -179,8 +180,9 @@ describe( 'Navigation editor', () => {
 			'//button[contains(., "Add new")]'
 		);
 		await addNewButton.click();
+
 		await page.keyboard.type( 'Main Menu' );
-		const [ createMenuButton ] = await page.$x(
+		const createMenuButton = await page.waitForXPath(
 			'//button[contains(., "Create menu")]'
 		);
 		await createMenuButton.click();
@@ -188,11 +190,16 @@ describe( 'Navigation editor', () => {
 		// Close the dropdown.
 		await page.keyboard.press( 'Escape' );
 
-		// Select the navigation block and create a block from existing pages.
-		await page.waitForSelector( 'div[aria-label="Block: Navigation"]' );
-		await page.click( 'div[aria-label="Block: Navigation"]' );
+		// A snackbar will appear when menu creation has completed.
+		await page.waitForXPath( '//div[contains(., "Menu created")]' );
 
-		const [ addAllPagesButton ] = await page.$x(
+		// Select the navigation block and create a block from existing pages.
+		const navigationBlock = await page.waitForSelector(
+			'div[aria-label="Block: Navigation"]'
+		);
+		await navigationBlock.click();
+
+		const addAllPagesButton = await page.waitForXPath(
 			'//button[contains(., "Add all pages")]'
 		);
 		await addAllPagesButton.click();
@@ -211,5 +218,39 @@ describe( 'Navigation editor', () => {
 		await page.waitForXPath( '//h2[contains(., "Editing: Test Menu 1")]' );
 
 		expect( await getSerializedBlocks() ).toMatchSnapshot();
+	} );
+
+	it( 'shows a submenu when a link is selected and hides it when clicking the editor to deselect it', async () => {
+		await setUpResponseMocking( [
+			...getMenuMocks( { GET: assignMockMenuIds( menusFixture ) } ),
+			...getMenuItemMocks( { GET: menuItemsFixture } ),
+		] );
+		await visitNavigationEditor();
+
+		// Select a link block with nested links in a submenu.
+		const parentLinkXPath =
+			'//li[@aria-label="Block: Link" and contains(.,"WordPress.org")]';
+		const linkBlock = await page.waitForXPath( parentLinkXPath );
+		await linkBlock.click();
+
+		// There should be a submenu link visible.
+		//
+		// Submenus are hidden using `visibility: hidden` and shown using
+		// `visibility: visible` so the visible/hidden options must be used
+		// when selecting the elements.
+		const submenuLinkXPath = `${ parentLinkXPath }//li[@aria-label="Block: Link"]`;
+		const submenuLinkVisible = await page.waitForXPath( submenuLinkXPath, {
+			visible: true,
+		} );
+		expect( submenuLinkVisible ).toBeDefined();
+
+		// Click the editor canvas.
+		await page.click( '.edit-navigation-editor__block-view' );
+
+		// There should be a submenu in the DOM, but it should be hidden.
+		const submenuLinkHidden = await page.waitForXPath( submenuLinkXPath, {
+			hidden: true,
+		} );
+		expect( submenuLinkHidden ).toBeDefined();
 	} );
 } );
