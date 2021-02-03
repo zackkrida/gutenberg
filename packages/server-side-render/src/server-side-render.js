@@ -44,7 +44,7 @@ export default function ServerSideRender( props ) {
 
 	const prevProps = usePrevious( props );
 	useEffect( () => {
-		if ( ! isEqual( prevProps, props ) ) {
+		if ( prevProps !== undefined && ! isEqual( prevProps, props ) ) {
 			debouncedFetchData();
 		}
 	} );
