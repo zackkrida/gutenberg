@@ -72,7 +72,7 @@ class Block_Templates_Test extends WP_UnitTestCase {
 
 		$this->assertEquals( get_stylesheet() . '//single', $template->id );
 		$this->assertEquals( get_stylesheet(), $template->theme );
-		$this->assertEquals( 'single', $template->slug );
+		$this->assertEquals( 'singleblergh', $template->slug );
 		$this->assertEquals( 'publish', $template->status );
 		$this->assertEquals( false, $template->is_custom );
 		$this->assertEquals( 'Single', $template->title );
