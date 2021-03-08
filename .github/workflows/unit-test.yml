@@ -90,7 +90,7 @@ jobs:
         npm run wp-env start
 
     - name: Set up problem matcher for PHPCS (lint check)
-      run: echo "::add-matcher::phpcs-problem-matcher.json"
+      run: echo "::add-matcher::.github/matchers/phpcs-problem-matcher.json"
 
     - name: Running lint check
       run: npm run lint-php
