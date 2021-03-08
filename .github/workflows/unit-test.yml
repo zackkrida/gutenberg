@@ -89,6 +89,9 @@ jobs:
         chmod -R 767 ./ # TODO: Possibly integrate in wp-env
         npm run wp-env start
 
+    - name: Set up problem matcher for PHPCS (lint check)
+      run: echo "::add-matcher::phpcs-problem-matcher.json"
+
     - name: Running lint check
       run: npm run lint-php
 
