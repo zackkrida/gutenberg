@@ -3120,7 +3120,7 @@ describe( 'selectors', () => {
 							'core/test-block-b',
 							'core/test-block-c',
 						],
-						__experimentalDefaultBlock: 'core/test-block-c',
+						__experimentalDefaultBlock: [ 'core/test-block-c' ],
 					},
 				},
 			};
@@ -3129,7 +3129,40 @@ describe( 'selectors', () => {
 					state,
 					'testClientIdA'
 				)
-			).toEqual( 'core/test-block-c' );
+			).toEqual( [ 'core/test-block-c', {} ] );
+		} );
+		it( 'should return the default block and block attributes for allowed blocks', () => {
+			const state = {
+				blocks: {
+					byClientId: {
+						testClientIdA: {
+							name: 'core/test-block-a',
+						},
+					},
+					attributes: {
+						testClientIdA: {},
+					},
+				},
+				settings: {},
+				blockListSettings: {
+					testClientIdA: {
+						allowedBlocks: [
+							'core/test-block-b',
+							'core/test-block-c',
+						],
+						__experimentalDefaultBlock: [
+							'core/test-block-c',
+							{ foo: 'foo', bar: 'bar' },
+						],
+					},
+				},
+			};
+			expect(
+				__experimentalGetDefaultBlockForAllowedBlocks(
+					state,
+					'testClientIdA'
+				)
+			).toEqual( [ 'core/test-block-c', { foo: 'foo', bar: 'bar' } ] );
 		} );
 		it( 'should return the editor default block when block list default is not specified', () => {
 			const state = {
@@ -3159,7 +3192,7 @@ describe( 'selectors', () => {
 					state,
 					'testClientIdA'
 				)
-			).toEqual( 'core/test-block-default' );
+			).toEqual( [ 'core/test-block-default', {} ] );
 		} );
 		it( 'should return undefined when default is not specified and editor default is not supported', () => {
 			const state = {

@@ -49,10 +49,8 @@ export default function BlockActions( {
 	const defaultBlock = __experimentalGetDefaultBlockForAllowedBlocks(
 		rootClientId
 	);
-	const canInsertDefaultBlock = canInsertBlockType(
-		defaultBlock,
-		rootClientId
-	);
+
+	const canInsertDefaultBlock = !! defaultBlock;
 
 	const {
 		removeBlocks,

@@ -1847,7 +1847,7 @@ export function getBlockListSettings( state, clientId ) {
  * @param {Object}  state    Editor state.
  * @param {?string} clientId Block client ID.
  *
- * @return {?string} default block name.
+ * @return {?[]}    default block, [ blockName, { blockAttributes } ].
  */
 export function __experimentalGetDefaultBlockForAllowedBlocks(
 	state,
@@ -1855,14 +1855,16 @@ export function __experimentalGetDefaultBlockForAllowedBlocks(
 ) {
 	const settings = getBlockListSettings( state, clientId );
 
-	const defaultBlock =
-		settings?.__experimentalDefaultBlock ?? getDefaultBlockName();
+	const [
+		blockName,
+		blockAttributes = {},
+	] = settings?.__experimentalDefaultBlock ?? [ getDefaultBlockName() ];
 
-	if ( ! canInsertBlockType( state, defaultBlock, clientId ) ) {
+	if ( ! canInsertBlockType( state, blockName, clientId ) ) {
 		return;
 	}
 
-	return defaultBlock;
+	return [ blockName, blockAttributes ];
 }
 
 /**

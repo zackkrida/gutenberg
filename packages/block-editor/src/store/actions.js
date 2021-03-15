@@ -1068,20 +1068,31 @@ export function selectionChange(
  *
  * @return {Object} Action object
  */
-export function* insertDefaultBlock( attributes, rootClientId, index ) {
+export function* insertDefaultBlock( attributes = {}, rootClientId, index ) {
 	// See if we specified a default for allowed blocks
-	const defaultBlockName = yield controls.select(
+	const defaultBlock = yield controls.select(
 		blockEditorStoreName,
 		'__experimentalGetDefaultBlockForAllowedBlocks',
 		rootClientId
 	);
 
 	// Abort if there is no default block type (if it has been unregistered).
-	if ( ! defaultBlockName ) {
+	if ( ! defaultBlock ) {
 		return;
 	}
 
-	const block = createBlock( defaultBlockName, attributes );
+	const [ defaultBlockName, defaultBlockAttributes ] = defaultBlock;
+
+	// prefer the non-empty block attributes
+	let blockAttributes = attributes;
+	if (
+		Object.keys( attributes ).length === 0 &&
+		Object.keys( defaultBlockAttributes ).length > 0
+	) {
+		blockAttributes = defaultBlockAttributes;
+	}
+
+	const block = createBlock( defaultBlockName, blockAttributes );
 
 	return yield insertBlock( block, index, rootClientId );
 }
