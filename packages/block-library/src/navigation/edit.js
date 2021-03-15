@@ -72,7 +72,10 @@ function Navigation( {
 				'core/page-list',
 				'core/spacer',
 			],
-			__experimentalDefaultBlock: 'core/navigation-link',
+			__experimentalDefaultBlock: [
+				'core/navigation-link',
+				{ type: 'page', kind: 'post-type' },
+			],
 			orientation: attributes.orientation || 'horizontal',
 			renderAppender:
 				( isImmediateParentOfSelectedBlock &&

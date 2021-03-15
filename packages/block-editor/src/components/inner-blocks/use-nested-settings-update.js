@@ -27,8 +27,9 @@ import { store as blockEditorStore } from '../../store';
  *                                              the child block.
  * @param {string}   orientation                The direction in which the block
  *                                              should face.
- * @param {string}   __experimentalDefaultBlock The default block name. Used to insert blocks
- *                                              of this type, before/after blocks in inner blocks.
+ * @param {[]}   __experimentalDefaultBlock     The default block: [ blockName, { blockAttributes } ].
+ *                                              Used to insert blocks of this type, before/after blocks
+ *                                              in inner blocks.
  */
 export default function useNestedSettingsUpdate(
 	clientId,
