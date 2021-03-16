@@ -33,6 +33,8 @@ import BlockCrashBoundary from './block-crash-boundary';
 import BlockHtml from './block-html';
 import { useBlockProps } from './use-block-props';
 import { store as blockEditorStore } from '../../store';
+import BlockListAppender from '../block-list-appender';
+import PlaceholderBlockAppender from '../placeholder-block-appender';
 
 export const BlockListBlockContext = createContext();
 
@@ -154,7 +156,16 @@ function BlockListBlock( {
 
 	let block;
 
-	if ( ! isValid ) {
+	//TODO: roll this back, this is a quick PoC
+	if ( name === 'core/placeholder' ) {
+		block = (
+			<BlockListAppender
+				className={ 'block-editor-placeholder-appender' }
+				replaceClientId={ clientId }
+				renderAppender={ PlaceholderBlockAppender }
+			/>
+		);
+	} else if ( ! isValid ) {
 		block = (
 			<Block className="has-warning">
 				<BlockInvalidWarning clientId={ clientId } />

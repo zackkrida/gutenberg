@@ -38,6 +38,7 @@ function InserterSearchResults( {
 	showBlockDirectory = false,
 	isDraggable = true,
 	shouldFocusBlock = true,
+	replaceClientId,
 } ) {
 	const debouncedSpeak = useDebounce( speak, 500 );
 
@@ -47,6 +48,7 @@ function InserterSearchResults( {
 		clientId,
 		isAppender,
 		shouldFocusBlock,
+		replaceClientId,
 	} );
 	const [
 		blockTypes,

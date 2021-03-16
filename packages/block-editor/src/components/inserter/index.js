@@ -136,6 +136,7 @@ class Inserter extends Component {
 			// This prop is experimental to give some time for the quick inserter to mature
 			// Feel free to make them stable after a few releases.
 			__experimentalIsQuick: isQuick,
+			replaceClientId,
 		} = this.props;
 
 		if ( isQuick ) {
@@ -147,6 +148,7 @@ class Inserter extends Component {
 					rootClientId={ rootClientId }
 					clientId={ clientId }
 					isAppender={ isAppender }
+					replaceClientId={ replaceClientId }
 				/>
 			);
 		}

@@ -33,6 +33,7 @@ function BlockListAppender( {
 	renderAppender: CustomAppender,
 	className,
 	selectedBlockClientId,
+	replaceClientId,
 	tagName: TagName = 'div',
 } ) {
 	if ( isLocked || CustomAppender === false ) {
@@ -42,7 +43,13 @@ function BlockListAppender( {
 	let appender;
 	if ( CustomAppender ) {
 		// Prefer custom render prop if provided.
-		appender = <CustomAppender />;
+		//TODO: why did we not pass any props, temp pass through for PoC
+		appender = (
+			<CustomAppender
+				replaceClientId={ replaceClientId }
+				replaceRootId={ rootClientId }
+			/>
+		);
 	} else {
 		const isDocumentAppender = ! rootClientId;
 		const isParentSelected = selectedBlockClientId === rootClientId;

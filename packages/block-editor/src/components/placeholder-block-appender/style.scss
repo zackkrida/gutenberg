@@ -1,0 +1,16 @@
+//throwaway styling for basic PoC
+.wp-block.block-list-appender.block-editor-placeholder-appender {
+	height: 36px;
+	width: 36px;
+	border: $border-width solid $gray-900;
+	margin-left: 0;
+	margin-right: 8px;
+
+	.block-editor-inserter {
+		margin-top: 6px;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 6px;
+	}
+}
+

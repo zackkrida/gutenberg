@@ -44,6 +44,7 @@ function useInsertionPoint( {
 	isAppender,
 	onSelect,
 	shouldFocusBlock = true,
+	replaceClientId,
 } ) {
 	const {
 		destinationRootClientId,
@@ -109,7 +110,15 @@ function useInsertionPoint( {
 		( blocks, meta, shouldForceFocusBlock = false ) => {
 			const selectedBlock = getSelectedBlock();
 
-			if (
+			if ( replaceClientId ) {
+				replaceBlocks(
+					replaceClientId,
+					blocks,
+					null,
+					shouldFocusBlock || shouldForceFocusBlock ? 0 : null,
+					meta
+				);
+			} else if (
 				! isAppender &&
 				selectedBlock &&
 				isUnmodifiedDefaultBlock( selectedBlock )
@@ -155,6 +164,7 @@ function useInsertionPoint( {
 			destinationIndex,
 			onSelect,
 			shouldFocusBlock,
+			replaceClientId,
 		]
 	);
 

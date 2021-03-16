@@ -30,6 +30,7 @@ export default function QuickInserter( {
 	rootClientId,
 	clientId,
 	isAppender,
+	replaceClientId,
 } ) {
 	const [ filterValue, setFilterValue ] = useState( '' );
 	const [ destinationRootClientId, onInsertBlocks ] = useInsertionPoint( {
@@ -37,7 +38,9 @@ export default function QuickInserter( {
 		rootClientId,
 		clientId,
 		isAppender,
+		replaceClientId,
 	} );
+
 	const [ blockTypes ] = useBlockTypesState(
 		destinationRootClientId,
 		onInsertBlocks
@@ -107,6 +110,7 @@ export default function QuickInserter( {
 					maxBlockPatterns={ showPatterns ? SHOWN_BLOCK_PATTERNS : 0 }
 					maxBlockTypes={ SHOWN_BLOCK_TYPES }
 					isDraggable={ false }
+					replaceClientId={ replaceClientId }
 				/>
 			</div>
 
