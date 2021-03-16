@@ -40,7 +40,7 @@ export default function useNestedSettingsUpdate(
 	captureToolbars,
 	orientation,
 	__experimentalDefaultBlock,
-	__experimentalInsertBeforeAfter,
+	__experimentalInsertBeforeAfter
 ) {
 	const { updateBlockListSettings } = useDispatch( blockEditorStore );
 
