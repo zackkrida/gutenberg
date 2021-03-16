@@ -15,6 +15,7 @@ jest.mock( '@wordpress/element', () => {
 jest.mock( '@wordpress/react-native-bridge', () => {
 	return {
 		addEventListener: jest.fn(),
+		mediaUploadSync: jest.fn(),
 		removeEventListener: jest.fn(),
 		subscribeParentGetHtml: jest.fn(),
 		subscribeParentToggleHTMLMode: jest.fn(),
@@ -53,7 +54,9 @@ jest.mock( 'react-native-dark-mode', () => {
 	};
 } );
 
-jest.mock( 'react-native-modal', () => () => 'Modal' );
+jest.mock( 'react-native-modal', () => ( { children, isVisible } ) =>
+	isVisible ? children : null
+);
 
 jest.mock( 'react-native-hr', () => () => 'Hr' );
 
