@@ -30,6 +30,9 @@ export default function BlockActions( {
 		getBlocksByClientId,
 		getTemplateLock,
 		__experimentalGetDefaultBlockForAllowedBlocks,
+		getBlockListSettings,
+		getSettings,
+		getBlockIndex,
 	} = useSelect( ( select ) => select( blockEditorStore ), [] );
 	const { getGroupingBlockName } = useSelect(
 		( select ) => select( blocksStore ),
@@ -49,8 +52,10 @@ export default function BlockActions( {
 	const defaultBlock = __experimentalGetDefaultBlockForAllowedBlocks(
 		rootClientId
 	);
+	const experimentalInsert = getBlockListSettings( rootClientId )
+		?.__experimentalInsertBeforeAfter;
 
-	const canInsertDefaultBlock = !! defaultBlock;
+	const canInsertDefaultBlock = !! defaultBlock || experimentalInsert;
 
 	const {
 		removeBlocks,
@@ -62,6 +67,7 @@ export default function BlockActions( {
 		setBlockMovingClientId,
 		setNavigationMode,
 		selectBlock,
+		__unstableSetInsertionPoint,
 	} = useDispatch( blockEditorStore );
 
 	const notifyCopy = useNotifyCopy();
@@ -79,10 +85,32 @@ export default function BlockActions( {
 			return removeBlocks( clientIds, updateSelection );
 		},
 		onInsertBefore() {
-			insertBeforeBlock( first( castArray( clientIds ) ) );
+			if ( experimentalInsert ) {
+				__unstableSetInsertionPoint(
+					rootClientId,
+					getBlockIndex(
+						first( castArray( clientIds ) ),
+						rootClientId
+					)
+				);
+				getSettings().__experimentalSetIsInserterOpened( true );
+			} else {
+				insertBeforeBlock( first( castArray( clientIds ) ) );
+			}
 		},
 		onInsertAfter() {
-			insertAfterBlock( last( castArray( clientIds ) ) );
+			if ( experimentalInsert ) {
+				__unstableSetInsertionPoint(
+					rootClientId,
+					getBlockIndex(
+						last( castArray( clientIds ) ),
+						rootClientId
+					) + 1
+				);
+				getSettings().__experimentalSetIsInserterOpened( true );
+			} else {
+				insertAfterBlock( last( castArray( clientIds ) ) );
+			}
 		},
 		onMoveTo() {
 			setNavigationMode( true );

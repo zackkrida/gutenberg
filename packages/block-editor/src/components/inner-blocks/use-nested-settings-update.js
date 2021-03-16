@@ -30,6 +30,8 @@ import { store as blockEditorStore } from '../../store';
  * @param {[]}   __experimentalDefaultBlock     The default block: [ blockName, { blockAttributes } ].
  *                                              Used to insert blocks of this type, before/after blocks
  *                                              in inner blocks.
+ *
+ * @param {boolean}  __experimentalInsertBeforeAfter Enables insertion of non-default blocks in before/after action.
  */
 export default function useNestedSettingsUpdate(
 	clientId,
@@ -37,7 +39,8 @@ export default function useNestedSettingsUpdate(
 	templateLock,
 	captureToolbars,
 	orientation,
-	__experimentalDefaultBlock
+	__experimentalDefaultBlock,
+	__experimentalInsertBeforeAfter,
 ) {
 	const { updateBlockListSettings } = useDispatch( blockEditorStore );
 
@@ -62,6 +65,7 @@ export default function useNestedSettingsUpdate(
 		const newSettings = {
 			allowedBlocks,
 			__experimentalDefaultBlock,
+			__experimentalInsertBeforeAfter,
 			templateLock:
 				templateLock === undefined ? parentLock : templateLock,
 		};

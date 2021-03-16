@@ -98,6 +98,7 @@ export function SocialLinksEdit( props ) {
 		placeholder: SocialPlaceholder,
 		templateLock: false,
 		__experimentalAppenderTagName: 'li',
+		__experimentalInsertBeforeAfter: true,
 	} );
 
 	const POPOVER_PROPS = {
