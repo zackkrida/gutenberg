@@ -13,7 +13,7 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Debug test-e2e",
+			"name": "Debug current e2e test",
 			"program": "${workspaceRoot}/node_modules/@wordpress/scripts/bin/wp-scripts.js",
 			"args": [
 				"test-e2e",

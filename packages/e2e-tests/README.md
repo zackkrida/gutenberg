@@ -28,7 +28,7 @@ npm run test-e2e
 ```
 ### Run all available tests and listen for changes.
 ```bash
-npm run test-e2e
+npm run test-e2e:watch
 ```
 
 ### Run a specific test file
