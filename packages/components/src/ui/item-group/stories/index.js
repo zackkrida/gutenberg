@@ -1,15 +1,6 @@
 /* eslint-disable no-alert */
 /* globals alert */
 /**
- * External dependencies
- */
-import {
-	Collapsible,
-	CollapsibleContent,
-	CollapsibleTrigger,
-} from '@wp-g2/components';
-
-/**
  * Internal dependencies
  */
 import { ItemGroup, Item } from '..';
@@ -35,27 +26,6 @@ export const _default = () => (
 		<Item action onClick={ () => alert( 'WordPress.org' ) }>
 			Code is Poetry — Click me!
 		</Item>
-		<Collapsible>
-			<CollapsibleTrigger as={ Item } action>
-				Toggle
-			</CollapsibleTrigger>
-			<CollapsibleContent>
-				<ItemGroup separated rounded size="small">
-					<Item action onClick={ () => alert( 'WordPress.org' ) }>
-						Code is Poetry — Click me!
-					</Item>
-					<Item action onClick={ () => alert( 'WordPress.org' ) }>
-						Code is Poetry — Click me!
-					</Item>
-					<Item action onClick={ () => alert( 'WordPress.org' ) }>
-						Code is Poetry — Click me!
-					</Item>
-					<Item action onClick={ () => alert( 'WordPress.org' ) }>
-						Code is Poetry — Click me!
-					</Item>
-				</ItemGroup>
-			</CollapsibleContent>
-		</Collapsible>
 	</ItemGroup>
 );
 
