@@ -515,7 +515,7 @@ function RichText(
 	 *
 	 * @param {WPSyntheticEvent} event A synthetic keyboard event.
 	 */
-	function handleSpace( event ) {
+	function handleListSpace( event ) {
 		const { keyCode, shiftKey, altKey, metaKey, ctrlKey } = event;
 
 		if (
@@ -677,6 +677,21 @@ function RichText(
 		setActiveFormats( newActiveFormats );
 	}
 
+	function handleSpace( event ) {
+		if ( event.defaultPrevented ) {
+			return;
+		}
+
+		const { keyCode, altKey, metaKey, ctrlKey } = event;
+
+		if ( keyCode !== SPACE || altKey || metaKey || ctrlKey ) {
+			return;
+		}
+
+		event.target.ownerDocument.execCommand( 'insertText', false, ' ' );
+		event.preventDefault();
+	}
+
 	function handleKeyDown( event ) {
 		if ( event.defaultPrevented ) {
 			return;
@@ -684,6 +699,7 @@ function RichText(
 
 		handleDelete( event );
 		handleEnter( event );
+		handleListSpace( event );
 		handleSpace( event );
 		handleHorizontalNavigation( event );
 	}
