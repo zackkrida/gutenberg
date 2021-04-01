@@ -95,7 +95,8 @@ function convertMenuItemsToBlocks( menuItems ) {
 	}
 
 	const menuTree = createDataTree( menuItems );
-	return mapMenuItemsToBlocks( menuTree );
+	const linkBLocks = mapMenuItemsToBlocks( menuTree );
+	return [ createBlock( 'core/navigation-link-list', {}, linkBLocks ) ];
 }
 
 function NavigationPlaceholder( { onCreate }, ref ) {
@@ -194,7 +195,7 @@ function NavigationPlaceholder( { onCreate }, ref ) {
 	};
 
 	const onCreateEmptyMenu = () => {
-		onCreate( [] );
+		onCreate( [ createBlock( 'core/navigation-link-list' ) ] );
 	};
 
 	const onCreateAllPages = () => {

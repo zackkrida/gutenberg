@@ -59,38 +59,33 @@ function Navigation( {
 		clientId
 	);
 
-	const innerBlocksProps = useInnerBlocksProps(
-		{
-			className: 'wp-block-navigation__container',
+	const innerBlocksProps = useInnerBlocksProps( blockProps, {
+		allowedBlocks: [
+			'core/navigation-link-list',
+			'core/search',
+			'core/social-links',
+			'core/page-list',
+			'core/spacer',
+		],
+		orientation: attributes.orientation || 'horizontal',
+		renderAppender:
+			( isImmediateParentOfSelectedBlock &&
+				! selectedBlockHasDescendants ) ||
+			isSelected
+				? InnerBlocks.DefaultAppender
+				: false,
+		__experimentalAppenderTagName: 'div',
+		__experimentalCaptureToolbars: true,
+		// Template lock set to false here so that the Nav
+		// Block on the experimental menus screen does not
+		// inherit templateLock={ 'all' }.
+		templateLock: false,
+		__experimentalLayout: {
+			type: 'default',
+			alignments: [],
 		},
-		{
-			allowedBlocks: [
-				'core/navigation-link',
-				'core/search',
-				'core/social-links',
-				'core/page-list',
-				'core/spacer',
-			],
-			orientation: attributes.orientation || 'horizontal',
-			renderAppender:
-				( isImmediateParentOfSelectedBlock &&
-					! selectedBlockHasDescendants ) ||
-				isSelected
-					? InnerBlocks.DefaultAppender
-					: false,
-			__experimentalAppenderTagName: 'li',
-			__experimentalCaptureToolbars: true,
-			// Template lock set to false here so that the Nav
-			// Block on the experimental menus screen does not
-			// inherit templateLock={ 'all' }.
-			templateLock: false,
-			__experimentalLayout: {
-				type: 'default',
-				alignments: [],
-			},
-			placeholder: <PlaceholderPreview />,
-		}
-	);
+		placeholder: <PlaceholderPreview />,
+	} );
 
 	if ( isPlaceholderShown ) {
 		return (
@@ -141,9 +136,7 @@ function Navigation( {
 					</PanelBody>
 				) }
 			</InspectorControls>
-			<nav { ...blockProps }>
-				<ul { ...innerBlocksProps } />
-			</nav>
+			<nav { ...innerBlocksProps } />
 		</>
 	);
 }
