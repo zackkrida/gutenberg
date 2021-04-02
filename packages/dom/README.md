@@ -272,7 +272,6 @@ _Parameters_
 
 -   _container_ `Element`: Focusable element.
 -   _isReverse_ `boolean`: True for end, false for start.
--   _mayUseScroll_ `boolean`: Whether to allow scrolling.
 
 <a name="placeCaretAtVerticalEdge" href="#placeCaretAtVerticalEdge">#</a> **placeCaretAtVerticalEdge**
 
@@ -283,7 +282,6 @@ _Parameters_
 -   _container_ `Element`: Focusable element.
 -   _isReverse_ `boolean`: True for bottom, false for top.
 -   _rect_ `[DOMRect]`: The rectangle to position the caret with.
--   _mayUseScroll_ `[boolean]`: True to allow scrolling, false to disallow.
 
 <a name="remove" href="#remove">#</a> **remove**
 
