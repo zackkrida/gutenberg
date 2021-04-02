@@ -72,4 +72,8 @@ module.exports = {
 	],
 	snapshotSerializers: [ 'enzyme-to-json/serializer', 'jest-emotion' ],
 	reporters: [ 'default', 'jest-junit' ],
+	watchPlugins: [
+		'jest-watch-typeahead/filename',
+		'jest-watch-typeahead/testname',
+	],
 };
