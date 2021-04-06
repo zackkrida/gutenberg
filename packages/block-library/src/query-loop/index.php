@@ -87,3 +87,30 @@ function register_block_core_query_loop() {
 	);
 }
 add_action( 'init', 'register_block_core_query_loop' );
+
+/**
+ * Filters the list of CSS class names for the current post.
+ * Removes classes that are not necessary in a full site editing context.
+ *
+ * @param string[] $classes An array of post class names.
+ * @param string[] $class   An array of additional class names added to the post.
+ * @param int      $post_id The post ID.
+ */
+function gutenberg_query_loop_block_filter_post_classes( $classes, $class, $post_id ) {
+	$post = get_post( $post_id );
+
+	if ( ! $post ) {
+		return $classes;
+	}
+
+	$remove_classes = array(
+		'hentry',
+		'format-standard',
+		$post->post_type,
+		'type-' . $post->post_type,
+		'status-' . $post->post_status,
+	);
+
+	return array_diff( $classes, $remove_classes );
+}
+add_filter( 'post_class', 'gutenberg_query_loop_block_filter_post_classes', 10, 3 );
