@@ -215,6 +215,13 @@ public protocol GutenbergBridgeDelegate: class {
     /// - Parameter tooltipShown: Tooltip's visibility value
     func gutenbergDidRequestSetFocalPointPickerTooltipShown(_ tooltipShown: Bool)
 
+    /// Tells the delegate that the editor requested which onboarding tips have been shown
+    func gutenbergDidRequestOnboardingTipsShown() -> String
+
+    /// Tells the delegate that the editor requested to set which onboarding tips have been shown
+    /// - Parameter tooltipShown: Name of tooltip displayed
+    func gutenbergDidRequestSetOnboardingTipsShown(_ tooltipShown: String)
+
     func gutenbergDidSendButtonPressedAction(_ buttonType: Gutenberg.ActionButtonType)
 
     // Media Collection

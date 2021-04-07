@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { AccessibilityInfo, Platform } from 'react-native';
+import { AccessibilityInfo, Platform, Text } from 'react-native';
 import { delay } from 'lodash';
 
 /**
@@ -9,7 +9,7 @@ import { delay } from 'lodash';
  */
 import { __ } from '@wordpress/i18n';
 import { Dropdown, ToolbarButton, Picker } from '@wordpress/components';
-import { Component } from '@wordpress/element';
+import { Component, useEffect, useState } from '@wordpress/element';
 import { withSelect } from '@wordpress/data';
 import { compose, withPreferredColorScheme } from '@wordpress/compose';
 import { isUnmodifiedDefaultBlock } from '@wordpress/blocks';
@@ -20,6 +20,10 @@ import {
 	insertAfter,
 	insertBefore,
 } from '@wordpress/icons';
+import {
+	requestOnboardingTipsShown,
+	setOnboardingTipsShown,
+} from '@wordpress/react-native-bridge';
 
 /**
  * Internal dependencies
@@ -377,4 +381,29 @@ export default compose( [
 	} ),
 
 	withPreferredColorScheme,
-] )( Inserter );
+] )( InserterWithTip );
+
+function InserterWithTip( props ) {
+	const [ tooltipVisible, setTooltipVisible ] = useState( false );
+
+	useEffect( () => {
+		requestOnboardingTipsShown( ( tipsShown ) => {
+			const tipsShownArray = tipsShown.split( ',' ).filter( Boolean );
+
+			if ( ! tipsShownArray.includes( 'block_inserter' ) ) {
+				const uniqueTipsShown = [
+					...new Set( [ ...tipsShownArray, 'block_inserter' ] ),
+				].join( ',' );
+				setTooltipVisible( true );
+				setOnboardingTipsShown( uniqueTipsShown );
+			}
+		} );
+	}, [] );
+
+	return (
+		<>
+			{ tooltipVisible && <Text>{ 'Tap to add block =>' }</Text> }
+			<Inserter { ...props } />
+		</>
+	);
+}

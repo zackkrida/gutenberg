@@ -363,4 +363,12 @@ export function setFocalPointPickerTooltipShown( tooltipShown ) {
 	);
 }
 
+export function requestOnboardingTipsShown( callback ) {
+	return RNReactNativeGutenbergBridge.requestOnboardingTipsShown( callback );
+}
+
+export function setOnboardingTipsShown( tooltipShown ) {
+	return RNReactNativeGutenbergBridge.setOnboardingTipsShown( tooltipShown );
+}
+
 export default RNReactNativeGutenbergBridge;

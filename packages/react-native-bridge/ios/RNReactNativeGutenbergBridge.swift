@@ -332,6 +332,16 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
     }
 
     @objc
+    func requestOnboardingTipsShown(_ callback: @escaping RCTResponseSenderBlock) {
+        callback([self.delegate?.gutenbergDidRequestOnboardingTipsShown() ?? ""])
+    }
+
+    @objc
+    func setOnboardingTipsShown(_ tipsShown: String) {
+        self.delegate?.gutenbergDidRequestSetOnboardingTipsShown(tipsShown)
+    }
+
+    @objc
     func mediaFilesBlockReplaceSync(_ mediaFiles: [[String: Any]], clientId: String) {
         DispatchQueue.main.async {
             if self.hasObservers {
