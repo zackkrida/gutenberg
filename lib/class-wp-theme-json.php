@@ -77,6 +77,12 @@ class WP_Theme_JSON {
 			'text'       => null,
 		),
 		'spacing'    => array(
+			'margin'  => array(
+				'top'    => null,
+				'right'  => null,
+				'bottom' => null,
+				'left'   => null,
+			),
 			'padding' => array(
 				'top'    => null,
 				'right'  => null,
@@ -111,6 +117,7 @@ class WP_Theme_JSON {
 			'duotone'        => null,
 		),
 		'spacing'    => array(
+			'customMargin'  => null,
 			'customPadding' => null,
 			'units'         => null,
 		),
@@ -258,6 +265,10 @@ class WP_Theme_JSON {
 		),
 		'line-height'              => array(
 			'value' => array( 'typography', 'lineHeight' ),
+		),
+		'margin'                   => array(
+			'value'      => array( 'spacing', 'margin' ),
+			'properties' => array( 'top', 'right', 'bottom', 'left' ),
 		),
 		'padding'                  => array(
 			'value'      => array( 'spacing', 'padding' ),
