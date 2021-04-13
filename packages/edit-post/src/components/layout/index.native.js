@@ -12,6 +12,7 @@ import { withSelect } from '@wordpress/data';
 import { BottomSheetSettings, FloatingToolbar } from '@wordpress/block-editor';
 import { compose, withPreferredColorScheme } from '@wordpress/compose';
 import {
+	SequentialTips,
 	HTMLTextInput,
 	KeyboardAvoidingView,
 	NoticeList,
@@ -124,37 +125,54 @@ class Layout extends Component {
 				) }
 				onLayout={ this.onRootViewLayout }
 			>
-				<AutosaveMonitor disableIntervalChecks />
-				<View
-					style={ getStylesFromColorScheme(
-						styles.background,
-						styles.backgroundDark
-					) }
-				>
-					{ isHtmlView ? this.renderHTML() : this.renderVisual() }
-					{ ! isHtmlView && Platform.OS === 'android' && (
-						<FloatingToolbar />
-					) }
-					<NoticeList />
-				</View>
-				<View
-					style={ {
-						flex: 0,
-						flexBasis: marginBottom,
-						height: marginBottom,
-					} }
-				/>
-				{ ! isHtmlView && (
-					<KeyboardAvoidingView
-						parentHeight={ this.state.rootViewHeight }
-						style={ toolbarKeyboardAvoidingViewStyle }
-						withAnimatedHeight
+				<SequentialTips>
+					<AutosaveMonitor disableIntervalChecks />
+					<View
+						style={ getStylesFromColorScheme(
+							styles.background,
+							styles.backgroundDark
+						) }
 					>
-						{ Platform.OS === 'ios' && <FloatingToolbar /> }
-						<Header />
-						<BottomSheetSettings />
-					</KeyboardAvoidingView>
-				) }
+						<SequentialTips.Tip name="block_inserter">
+							Add a block
+						</SequentialTips.Tip>
+						<SequentialTips.Tip name="block_actions">
+							Remove or duplicate a block
+						</SequentialTips.Tip>
+						<SequentialTips.Tip name="block_settings">
+							Modify block settings
+						</SequentialTips.Tip>
+						<SequentialTips.Tip name="media_actions">
+							Edit or replace media
+						</SequentialTips.Tip>
+						<SequentialTips.Tip name="help">
+							Find additional help
+						</SequentialTips.Tip>
+						{ isHtmlView ? this.renderHTML() : this.renderVisual() }
+						{ ! isHtmlView && Platform.OS === 'android' && (
+							<FloatingToolbar />
+						) }
+						<NoticeList />
+					</View>
+					<View
+						style={ {
+							flex: 0,
+							flexBasis: marginBottom,
+							height: marginBottom,
+						} }
+					/>
+					{ ! isHtmlView && (
+						<KeyboardAvoidingView
+							parentHeight={ this.state.rootViewHeight }
+							style={ toolbarKeyboardAvoidingViewStyle }
+							withAnimatedHeight
+						>
+							{ Platform.OS === 'ios' && <FloatingToolbar /> }
+							<Header />
+							<BottomSheetSettings />
+						</KeyboardAvoidingView>
+					) }
+				</SequentialTips>
 			</SafeAreaView>
 		);
 	}
