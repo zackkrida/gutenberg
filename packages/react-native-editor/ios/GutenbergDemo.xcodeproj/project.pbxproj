@@ -10,11 +10,11 @@
 		00E356F31AD99517003FC87E /* gutenbergTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* gutenbergTests.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		13F010C1A20035F7B1DF7A8C /* Pods_GutenbergDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4B0F242CA6D649D6CD0CE7A /* Pods_GutenbergDemoTests.framework */; };
 		1E4F2E752459E6F200EB73E7 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E85944D2449D85A006CC6A0 /* WebViewController.swift */; };
 		1EFFAB71253EF6580062051E /* DocumentsMediaSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFAB70253EF6580062051E /* DocumentsMediaSource.swift */; };
-		6EBC6CA237E4D4B00D5AC79F /* Pods_GutenbergDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB79EC55FB340834C8D3BAB6 /* Pods_GutenbergDemo.framework */; };
 		7EC7328F21907E3F00FED2E6 /* GutenbergViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7328E21907E3F00FED2E6 /* GutenbergViewController.swift */; };
-		950B7A8B00E7FAB67173E517 /* Pods_GutenbergDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D550F9EC8C63C5F836281628 /* Pods_GutenbergDemoTests.framework */; };
+		C4C93358E10161E84B58E927 /* Pods_GutenbergDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8061C53A037B150F783D9829 /* Pods_GutenbergDemo.framework */; };
 		F151983C2100DC3D000F6E97 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15198392100DC3D000F6E97 /* AppDelegate.swift */; };
 		F151983D2100DC3D000F6E97 /* MediaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151983A2100DC3D000F6E97 /* MediaProvider.swift */; };
 		F1EE6F7821E7F0A500241744 /* NotoSerif-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1EE6F7421E7F0A500241744 /* NotoSerif-BoldItalic.ttf */; };
@@ -48,15 +48,15 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = GutenbergDemo/Info.plist; sourceTree = "<group>"; };
 		1E85944D2449D85A006CC6A0 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = GutenbergDemo/WebViewController.swift; sourceTree = "<group>"; };
 		1EFFAB70253EF6580062051E /* DocumentsMediaSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsMediaSource.swift; sourceTree = "<group>"; };
-		66F6B74F51BD6921D3AF25F6 /* Pods-GutenbergDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GutenbergDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-GutenbergDemoTests/Pods-GutenbergDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
-		71AC74DFA49CB3BF62D440DB /* Pods-GutenbergDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GutenbergDemoTests.release.xcconfig"; path = "Target Support Files/Pods-GutenbergDemoTests/Pods-GutenbergDemoTests.release.xcconfig"; sourceTree = "<group>"; };
+		68B41B7A3D3F3A2FC399FCF7 /* Pods-GutenbergDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GutenbergDemo.debug.xcconfig"; path = "Target Support Files/Pods-GutenbergDemo/Pods-GutenbergDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		7EA30CF021AC8CDA0092F894 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		7EC7328E21907E3F00FED2E6 /* GutenbergViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; name = GutenbergViewController.swift; path = GutenbergDemo/GutenbergViewController.swift; sourceTree = "<group>"; tabWidth = 1; };
+		8061C53A037B150F783D9829 /* Pods_GutenbergDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GutenbergDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1421CBA21DE3A9BED78063 /* Pods-GutenbergDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GutenbergDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-GutenbergDemoTests/Pods-GutenbergDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9193870E2260BA5500E4FBD6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		9193873C2260BA7800E4FBD6 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
-		AB79EC55FB340834C8D3BAB6 /* Pods_GutenbergDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GutenbergDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AC045626571B657FA384BB16 /* Pods-GutenbergDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GutenbergDemo.release.xcconfig"; path = "Target Support Files/Pods-GutenbergDemo/Pods-GutenbergDemo.release.xcconfig"; sourceTree = "<group>"; };
-		D550F9EC8C63C5F836281628 /* Pods_GutenbergDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GutenbergDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A00FA0B862AEDDBC12FFF67A /* Pods-GutenbergDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GutenbergDemoTests.release.xcconfig"; path = "Target Support Files/Pods-GutenbergDemoTests/Pods-GutenbergDemoTests.release.xcconfig"; sourceTree = "<group>"; };
+		C73CA224B0F56756AD315EDE /* Pods-GutenbergDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GutenbergDemo.release.xcconfig"; path = "Target Support Files/Pods-GutenbergDemo/Pods-GutenbergDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F15198372100DC3C000F6E97 /* gutenberg-Bridging-Header.h */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = "gutenberg-Bridging-Header.h"; sourceTree = "<group>"; tabWidth = 1; };
 		F15198392100DC3D000F6E97 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = GutenbergDemo/AppDelegate.swift; sourceTree = "<group>"; tabWidth = 1; };
 		F151983A2100DC3D000F6E97 /* MediaProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; name = MediaProvider.swift; path = GutenbergDemo/MediaProvider.swift; sourceTree = "<group>"; tabWidth = 1; usesTabs = 0; };
@@ -64,7 +64,7 @@
 		F1EE6F7521E7F0A500241744 /* NotoSerif-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerif-Regular.ttf"; sourceTree = "<group>"; };
 		F1EE6F7621E7F0A500241744 /* NotoSerif-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerif-Italic.ttf"; sourceTree = "<group>"; };
 		F1EE6F7721E7F0A500241744 /* NotoSerif-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerif-Bold.ttf"; sourceTree = "<group>"; };
-		F2F167661C7FE694D2639A72 /* Pods-GutenbergDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GutenbergDemo.debug.xcconfig"; path = "Target Support Files/Pods-GutenbergDemo/Pods-GutenbergDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		F4B0F242CA6D649D6CD0CE7A /* Pods_GutenbergDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GutenbergDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF37F8D0223819FA00AFA3DB /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FF6836C722035EAB00A0C562 /* MediaUploadCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaUploadCoordinator.swift; path = GutenbergDemo/MediaUploadCoordinator.swift; sourceTree = "<group>"; };
 		FF83DAA82226905A00A34C93 /* CustomImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageLoader.swift; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				950B7A8B00E7FAB67173E517 /* Pods_GutenbergDemoTests.framework in Frameworks */,
+				13F010C1A20035F7B1DF7A8C /* Pods_GutenbergDemoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,7 +85,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF37F903223819FA00AFA3DB /* JavaScriptCore.framework in Frameworks */,
-				6EBC6CA237E4D4B00D5AC79F /* Pods_GutenbergDemo.framework in Frameworks */,
+				C4C93358E10161E84B58E927 /* Pods_GutenbergDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,8 +136,8 @@
 				9193870E2260BA5500E4FBD6 /* MobileCoreServices.framework */,
 				FF37F8D0223819FA00AFA3DB /* JavaScriptCore.framework */,
 				7EA30CF021AC8CDA0092F894 /* libxml2.tbd */,
-				AB79EC55FB340834C8D3BAB6 /* Pods_GutenbergDemo.framework */,
-				D550F9EC8C63C5F836281628 /* Pods_GutenbergDemoTests.framework */,
+				8061C53A037B150F783D9829 /* Pods_GutenbergDemo.framework */,
+				F4B0F242CA6D649D6CD0CE7A /* Pods_GutenbergDemoTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -169,10 +169,10 @@
 		918EE91F38EF19A86F38D86F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F2F167661C7FE694D2639A72 /* Pods-GutenbergDemo.debug.xcconfig */,
-				AC045626571B657FA384BB16 /* Pods-GutenbergDemo.release.xcconfig */,
-				66F6B74F51BD6921D3AF25F6 /* Pods-GutenbergDemoTests.debug.xcconfig */,
-				71AC74DFA49CB3BF62D440DB /* Pods-GutenbergDemoTests.release.xcconfig */,
+				68B41B7A3D3F3A2FC399FCF7 /* Pods-GutenbergDemo.debug.xcconfig */,
+				C73CA224B0F56756AD315EDE /* Pods-GutenbergDemo.release.xcconfig */,
+				8D1421CBA21DE3A9BED78063 /* Pods-GutenbergDemoTests.debug.xcconfig */,
+				A00FA0B862AEDDBC12FFF67A /* Pods-GutenbergDemoTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -204,7 +204,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "GutenbergDemoTests" */;
 			buildPhases = (
-				70B839CE7B6A174DC4DE8FB6 /* [CP] Check Pods Manifest.lock */,
+				6EE54575BC5628963B64FDB8 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
@@ -223,12 +223,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "GutenbergDemo" */;
 			buildPhases = (
-				74E4D376F06BC61DB863CCC7 /* [CP] Check Pods Manifest.lock */,
+				A06ED42EFAC0696847907112 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				06CE89E9A162D62B604C3B6C /* [CP] Embed Pods Frameworks */,
+				BB3E8A674BC5009FB2AAC46C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -317,95 +317,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../../../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		06CE89E9A162D62B604C3B6C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GutenbergDemo/Pods-GutenbergDemo-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BVLinearGradient/BVLinearGradient.framework",
-				"${BUILT_PRODUCTS_DIR}/DoubleConversion/DoubleConversion.framework",
-				"${BUILT_PRODUCTS_DIR}/FBReactNativeSpec/FBReactNativeSpec.framework",
-				"${BUILT_PRODUCTS_DIR}/Folly/folly.framework",
-				"${BUILT_PRODUCTS_DIR}/Gutenberg/Gutenberg.framework",
-				"${BUILT_PRODUCTS_DIR}/RCTTypeSafety/RCTTypeSafety.framework",
-				"${BUILT_PRODUCTS_DIR}/RNCMaskedView/RNCMaskedView.framework",
-				"${BUILT_PRODUCTS_DIR}/RNGestureHandler/RNGestureHandler.framework",
-				"${BUILT_PRODUCTS_DIR}/RNReanimated/RNReanimated.framework",
-				"${BUILT_PRODUCTS_DIR}/RNSVG/RNSVG.framework",
-				"${BUILT_PRODUCTS_DIR}/RNScreens/RNScreens.framework",
-				"${BUILT_PRODUCTS_DIR}/RNTAztecView/RNTAztecView.framework",
-				"${BUILT_PRODUCTS_DIR}/React-Core/React.framework",
-				"${BUILT_PRODUCTS_DIR}/React-CoreModules/CoreModules.framework",
-				"${BUILT_PRODUCTS_DIR}/React-RCTAnimation/RCTAnimation.framework",
-				"${BUILT_PRODUCTS_DIR}/React-RCTBlob/RCTBlob.framework",
-				"${BUILT_PRODUCTS_DIR}/React-RCTImage/RCTImage.framework",
-				"${BUILT_PRODUCTS_DIR}/React-RCTLinking/RCTLinking.framework",
-				"${BUILT_PRODUCTS_DIR}/React-RCTNetwork/RCTNetwork.framework",
-				"${BUILT_PRODUCTS_DIR}/React-RCTSettings/RCTSettings.framework",
-				"${BUILT_PRODUCTS_DIR}/React-RCTText/RCTText.framework",
-				"${BUILT_PRODUCTS_DIR}/React-RCTVibration/RCTVibration.framework",
-				"${BUILT_PRODUCTS_DIR}/React-cxxreact/cxxreact.framework",
-				"${BUILT_PRODUCTS_DIR}/React-jsi/jsi.framework",
-				"${BUILT_PRODUCTS_DIR}/React-jsiexecutor/jsireact.framework",
-				"${BUILT_PRODUCTS_DIR}/React-jsinspector/jsinspector.framework",
-				"${BUILT_PRODUCTS_DIR}/ReactCommon/ReactCommon.framework",
-				"${BUILT_PRODUCTS_DIR}/WordPress-Aztec-iOS/Aztec.framework",
-				"${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework",
-				"${BUILT_PRODUCTS_DIR}/glog/glog.framework",
-				"${BUILT_PRODUCTS_DIR}/react-native-blur/react_native_blur.framework",
-				"${BUILT_PRODUCTS_DIR}/react-native-get-random-values/react_native_get_random_values.framework",
-				"${BUILT_PRODUCTS_DIR}/react-native-keyboard-aware-scroll-view/react_native_keyboard_aware_scroll_view.framework",
-				"${BUILT_PRODUCTS_DIR}/react-native-safe-area/react_native_safe_area.framework",
-				"${BUILT_PRODUCTS_DIR}/react-native-safe-area-context/react_native_safe_area_context.framework",
-				"${BUILT_PRODUCTS_DIR}/react-native-slider/react_native_slider.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BVLinearGradient.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoubleConversion.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBReactNativeSpec.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/folly.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gutenberg.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTTypeSafety.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNCMaskedView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNGestureHandler.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNReanimated.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNSVG.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNScreens.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNTAztecView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreModules.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTAnimation.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTBlob.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTLinking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTNetwork.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTSettings.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTText.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTVibration.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/cxxreact.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsi.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsireact.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsinspector.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactCommon.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Aztec.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/glog.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_blur.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_get_random_values.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_keyboard_aware_scroll_view.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_safe_area.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_safe_area_context.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_slider.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GutenbergDemo/Pods-GutenbergDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		70B839CE7B6A174DC4DE8FB6 /* [CP] Check Pods Manifest.lock */ = {
+		6EE54575BC5628963B64FDB8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -427,7 +339,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		74E4D376F06BC61DB863CCC7 /* [CP] Check Pods Manifest.lock */ = {
+		A06ED42EFAC0696847907112 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -447,6 +359,98 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BB3E8A674BC5009FB2AAC46C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GutenbergDemo/Pods-GutenbergDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BVLinearGradient/BVLinearGradient.framework",
+				"${BUILT_PRODUCTS_DIR}/DoubleConversion/DoubleConversion.framework",
+				"${BUILT_PRODUCTS_DIR}/FBReactNativeSpec/FBReactNativeSpec.framework",
+				"${BUILT_PRODUCTS_DIR}/Gutenberg/Gutenberg.framework",
+				"${BUILT_PRODUCTS_DIR}/RCT-Folly/folly.framework",
+				"${BUILT_PRODUCTS_DIR}/RCTTypeSafety/RCTTypeSafety.framework",
+				"${BUILT_PRODUCTS_DIR}/RNCMaskedView/RNCMaskedView.framework",
+				"${BUILT_PRODUCTS_DIR}/RNGestureHandler/RNGestureHandler.framework",
+				"${BUILT_PRODUCTS_DIR}/RNReanimated/RNReanimated.framework",
+				"${BUILT_PRODUCTS_DIR}/RNSVG/RNSVG.framework",
+				"${BUILT_PRODUCTS_DIR}/RNScreens/RNScreens.framework",
+				"${BUILT_PRODUCTS_DIR}/RNTAztecView/RNTAztecView.framework",
+				"${BUILT_PRODUCTS_DIR}/React-Core/React.framework",
+				"${BUILT_PRODUCTS_DIR}/React-CoreModules/CoreModules.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTAnimation/RCTAnimation.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTBlob/RCTBlob.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTImage/RCTImage.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTLinking/RCTLinking.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTNetwork/RCTNetwork.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTSettings/RCTSettings.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTText/RCTText.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTVibration/RCTVibration.framework",
+				"${BUILT_PRODUCTS_DIR}/React-cxxreact/cxxreact.framework",
+				"${BUILT_PRODUCTS_DIR}/React-jsi/jsi.framework",
+				"${BUILT_PRODUCTS_DIR}/React-jsiexecutor/jsireact.framework",
+				"${BUILT_PRODUCTS_DIR}/React-jsinspector/jsinspector.framework",
+				"${BUILT_PRODUCTS_DIR}/React-perflogger/reactperflogger.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactCommon/ReactCommon.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactNativeDarkMode/ReactNativeDarkMode.framework",
+				"${BUILT_PRODUCTS_DIR}/WordPress-Aztec-iOS/Aztec.framework",
+				"${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework",
+				"${BUILT_PRODUCTS_DIR}/glog/glog.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-blur/react_native_blur.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-get-random-values/react_native_get_random_values.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-keyboard-aware-scroll-view/react_native_keyboard_aware_scroll_view.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-safe-area/react_native_safe_area.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-safe-area-context/react_native_safe_area_context.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-slider/react_native_slider.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BVLinearGradient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoubleConversion.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBReactNativeSpec.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gutenberg.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/folly.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTTypeSafety.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNCMaskedView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNGestureHandler.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNReanimated.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNSVG.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNScreens.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNTAztecView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreModules.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTAnimation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTBlob.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTLinking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTNetwork.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTSettings.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTText.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTVibration.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/cxxreact.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsi.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsireact.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsinspector.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/reactperflogger.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactCommon.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactNativeDarkMode.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Aztec.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/glog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_blur.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_get_random_values.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_keyboard_aware_scroll_view.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_safe_area.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_safe_area_context.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_slider.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GutenbergDemo/Pods-GutenbergDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -500,7 +504,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 66F6B74F51BD6921D3AF25F6 /* Pods-GutenbergDemoTests.debug.xcconfig */;
+			baseConfigurationReference = 8D1421CBA21DE3A9BED78063 /* Pods-GutenbergDemoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -516,7 +520,7 @@
 					"$(SRCROOT)/../node_modules/react-native-video/ios/**",
 				);
 				INFOPLIST_FILE = gutenbergTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -538,7 +542,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 71AC74DFA49CB3BF62D440DB /* Pods-GutenbergDemoTests.release.xcconfig */;
+			baseConfigurationReference = A00FA0B862AEDDBC12FFF67A /* Pods-GutenbergDemoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -551,7 +555,7 @@
 					"$(SRCROOT)/../node_modules/react-native-video/ios/**",
 				);
 				INFOPLIST_FILE = gutenbergTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -573,7 +577,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2F167661C7FE694D2639A72 /* Pods-GutenbergDemo.debug.xcconfig */;
+			baseConfigurationReference = 68B41B7A3D3F3A2FC399FCF7 /* Pods-GutenbergDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -614,7 +618,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC045626571B657FA384BB16 /* Pods-GutenbergDemo.release.xcconfig */;
+			baseConfigurationReference = C73CA224B0F56756AD315EDE /* Pods-GutenbergDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
