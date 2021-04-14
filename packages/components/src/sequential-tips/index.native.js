@@ -26,7 +26,7 @@ const tips = [
 
 const SequentialTipsContext = createContext();
 
-const SequentialStepper = ( { children, blockCount } ) => {
+const SequentialStepper = ( { children, blockCount, selectedBlockName } ) => {
 	const [ index, setIndex ] = useState( -1 );
 	useEffect( () => {
 		if ( index > tips.length ) {
@@ -43,6 +43,7 @@ const SequentialStepper = ( { children, blockCount } ) => {
 	return (
 		<SequentialTipsContext.Provider value={ currentTip }>
 			<Text>Tip Status: { currentTip }</Text>
+			<Text>Selected Block Name: { selectedBlockName }</Text>
 			{ children }
 		</SequentialTipsContext.Provider>
 	);
@@ -70,9 +71,15 @@ const Tip = ( { children, name } ) => {
 
 const SequentialTips = compose( [
 	withSelect( ( select ) => {
-		const { getBlockCount } = select( blockEditorStore );
+		const {
+			getBlockCount,
+			getSelectedBlockClientId,
+			getBlockName,
+		} = select( blockEditorStore );
 		const blockCount = getBlockCount();
-		return { blockCount };
+		const selectedBlockClientId = getSelectedBlockClientId();
+		const selectedBlockName = getBlockName( selectedBlockClientId );
+		return { blockCount, selectedBlockName };
 	} ),
 ] )( SequentialStepper );
 
