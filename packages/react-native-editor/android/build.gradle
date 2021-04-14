@@ -6,7 +6,7 @@ buildscript {
         minSdkVersion = 21
         compileSdkVersion = 29
         targetSdkVersion = 29
-        supportLibVersion = '28.0.0'
+        supportLibVersion = '29.0.2'
         wordpressUtilsVersion = '1.22'
         ndkVersion = "20.1.5948944"
     }
@@ -20,9 +20,6 @@ buildscript {
     }
 }
 
-// Load the "build from source" flag value but default to `true` since this is the demo gutenberg-mobile project so
-project.ext.buildGutenbergFromSource = project.properties.getOrDefault('wp.BUILD_GUTENBERG_FROM_SOURCE', true).toBoolean()
-
 allprojects {
     repositories {
         mavenLocal()
@@ -33,6 +30,7 @@ allprojects {
 
         google()
         jcenter()
-        maven { url 'https://www.jitpack.io' }
+        maven { url 'https://jitpack.io' }
+        maven { url "https://a8c-libs.s3.amazonaws.com/android" }
     }
 }

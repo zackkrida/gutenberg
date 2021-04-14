@@ -3,7 +3,7 @@ package org.wordpress.mobile.ReactNativeAztec;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.text.LineBreaker;
+//import android.graphics.text.LineBreaker;
 import android.os.Build;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -217,7 +217,8 @@ public class ReactAztecManager extends BaseViewManager<ReactAztecText, LayoutSha
             // force a 2nd setText from JS side to Native, just set a high eventCount
             int eventCount = inputMap.getInt("eventCount");
 
-            if (view.mNativeEventCount < eventCount) {
+            if (view.getEventCounter() < eventCount) {
+                view.setEventCounterSyncFromJS(eventCount);
                 setTextfromJS(view, inputMap.getString("text"), inputMap.getMap("selection"));
             }
         }
@@ -379,16 +380,17 @@ public class ReactAztecManager extends BaseViewManager<ReactAztecText, LayoutSha
                   only way how to make lint happy.
              */
             // Value is hardcoded because Lint is failing with a false positive "Unnecessary; SDK_INT is never < 21"
-            if (Build.VERSION.SDK_INT >= 29) {
-                setJustificationModeSdk29(view, LineBreaker.JUSTIFICATION_MODE_INTER_WORD);
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            if (Build.VERSION.SDK_INT >= 29) {
+//                setJustificationModeSdk29(view, LineBreaker.JUSTIFICATION_MODE_INTER_WORD);
+//            } else
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 setJustificationModeSDK26(view, Layout.JUSTIFICATION_MODE_INTER_WORD);
             }
             view.setGravity(Gravity.START);
         } else {
             // Value is hardcoded because Lint is failing with a false positive "Unnecessary; SDK_INT is never < 21"
             if (Build.VERSION.SDK_INT >= 29) {
-                setJustificationModeSdk29(view, LineBreaker.JUSTIFICATION_MODE_NONE);
+                //setJustificationModeSdk29(view, LineBreaker.JUSTIFICATION_MODE_NONE);
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 setJustificationModeSDK26(view, Layout.JUSTIFICATION_MODE_NONE);
             }

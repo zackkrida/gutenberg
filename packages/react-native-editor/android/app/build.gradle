@@ -108,6 +108,7 @@ def enableProguardInReleaseBuilds = false
 def enableHermes = project.ext.react.get("enableHermes", false);
 
 android {
+    buildToolsVersion "29.0.3"
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
@@ -122,10 +123,10 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        ndk { 
-            abiFilters "armeabi", "armeabi-v7a", "x86", "mips" 
-            
-        } 
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+
+        }
     }
     splits {
         abi {
@@ -146,11 +147,12 @@ android {
         variant.outputs.each { output ->
             // For each separate APK per architecture, set a unique version code as described here:
             // https://developer.android.com/studio/build/configure-apk-splits.html
+            // Example: versionCode 1 will generate 1001 for armeabi-v7a, 1002 for x86, etc.
             def versionCodes = ["armeabi-v7a": 1, "x86": 2, "arm64-v8a": 3, "x86_64": 4]
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =
-                        versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
+                        defaultConfig.versionCode * 1000 + versionCodes.get(abi)
             }
         }
     }
@@ -166,24 +168,15 @@ repositories {
     maven { url "https://jitpack.io" }
 }
 
-
 dependencies {
-    implementation project(':@wordpress_react-native-aztec')
-    implementation project(':@wordpress_react-native-bridge')
-    implementation project(':react-native-linear-gradient')
-    implementation project(':@react-native-community_slider')
-    implementation project(':react-native-video')
-    implementation project(':react-native-svg')
-    implementation project(':react-native-get-random-values')
-    implementation project(':@react-native-community_masked-view')
-    implementation project(':react-native-gesture-handler')
-    implementation project(':react-native-screens')
-    implementation project(':react-native-safe-area-context')
-    implementation project(':react-native-reanimated')
-    implementation "org.wordpress:utils:$wordpressUtilsVersion"
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    //noinspection GradleDynamicVersion
-    implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation("com.github.wordpress-mobile.gutenberg-mobile:react-native-bridge", {
+        exclude group: 'org.wordpress', module: 'utils'
+    })
+    implementation("org.wordpress:utils:$wordpressUtilsVersion", {
+        exclude group: 'com.android.support'
+    })
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation "com.facebook.react:react-native:0.64.0-rc.3"  // From node_modules
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 }
 

@@ -10,7 +10,7 @@ import { View } from 'react-native';
 import {
 	BlockControls,
 	InnerBlocks,
-	JustifyToolbar,
+	JustifyContentControl,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { createBlock } from '@wordpress/blocks';
@@ -73,15 +73,12 @@ export default function ButtonsEdit( {
 	);
 
 	useEffect( () => {
-		const margins = 2 * styles.parent.marginRight;
 		const { width } = sizes || {};
 		const { isFullWidth } = alignmentHelpers;
 
 		if ( width ) {
-			const base = width - margins;
 			const isFullWidthBlock = isFullWidth( align );
-
-			setMaxWidth( isFullWidthBlock ? base - 2 * spacing : base );
+			setMaxWidth( isFullWidthBlock ? blockWidth : width );
 		}
 	}, [ sizes, align ] );
 
@@ -114,14 +111,16 @@ export default function ButtonsEdit( {
 		</View>
 	) );
 
+	const justifyControls = [ 'left', 'center', 'right' ];
+
 	const remove = useCallback( () => removeBlock( clientId ), [ clientId ] );
 	const shouldRenderFooterAppender = isSelected || isInnerButtonSelected;
 	return (
 		<>
 			{ isSelected && (
-				<BlockControls>
-					<JustifyToolbar
-						allowedControls={ [ 'left', 'center', 'right' ] }
+				<BlockControls group="block">
+					<JustifyContentControl
+						allowedControls={ justifyControls }
 						value={ contentJustification }
 						onChange={ ( value ) =>
 							setAttributes( { contentJustification: value } )
@@ -144,7 +143,7 @@ export default function ButtonsEdit( {
 				horizontalAlignment={ contentJustification }
 				onDeleteBlock={ shouldDelete ? remove : undefined }
 				onAddBlock={ onAddNextButton }
-				parentWidth={ maxWidth }
+				parentWidth={ maxWidth } // This value controls the width of that the buttons are able to expand to.
 				marginHorizontal={ spacing }
 				marginVertical={ spacing }
 				__experimentalLayout={ layoutProp }
