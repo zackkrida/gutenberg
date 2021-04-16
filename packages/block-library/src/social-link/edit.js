@@ -25,7 +25,7 @@ import { keyboardReturn } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
-import { getIconBySite, getNameBySite } from './social-list';
+import { GetIconBySite, GetNameBySite } from './social-list';
 
 const SocialLinkEdit = ( {
 	attributes,
@@ -40,8 +40,8 @@ const SocialLinkEdit = ( {
 		'wp-social-link__is-incomplete': ! url,
 	} );
 
-	const IconComponent = getIconBySite( service );
-	const socialLinkName = getNameBySite( service );
+	const IconComponent = GetIconBySite( service );
+	const socialLinkName = GetNameBySite( service );
 	const blockProps = useBlockProps( {
 		className: classes,
 		style: {
