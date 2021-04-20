@@ -40,6 +40,8 @@ function InserterMenu( {
 } ) {
 	const [ filterValue, setFilterValue ] = useState( '' );
 	const [ searchFormHeight, setSearchFormHeight ] = useState( 0 );
+	// eslint-disable-next-line no-undef
+	const [ showSearchForm, setShowSearchForm ] = useState( true );
 
 	const {
 		showInsertionPoint,
@@ -106,6 +108,7 @@ function InserterMenu( {
 
 		// Show search form if there are enough items to filter.
 		if ( getItems()?.length < MIN_ITEMS_FOR_SEARCH ) {
+			setShowSearchForm( false );
 		}
 
 		return hideInsertionPoint;
@@ -180,21 +183,24 @@ function InserterMenu( {
 			onClose={ onClose }
 			hideHeader
 			hasNavigation
-			setMinHeightToMaxHeight={ true }
+			setMinHeightToMaxHeight={ showSearchForm }
 		>
 			<BottomSheetConsumer>
 				{ ( { listProps, safeAreaBottomInset } ) => (
 					<View>
-						<InserterSearchForm
-							onChange={ ( value ) => {
-								setFilterValue( value );
-							} }
-							value={ filterValue }
-							onLayout={ ( event ) => {
-								const { height } = event.nativeEvent.layout;
-								setSearchFormHeight( height );
-							} }
-						/>
+						{ showSearchForm && (
+							<InserterSearchForm
+								onChange={ ( value ) => {
+									setFilterValue( value );
+								} }
+								value={ filterValue }
+								onLayout={ ( event ) => {
+									const { height } = event.nativeEvent.layout;
+									setSearchFormHeight( height );
+								} }
+							/>
+						) }
+
 						<InserterSearchResults
 							items={ getItems() }
 							onSelect={ ( item ) => {
