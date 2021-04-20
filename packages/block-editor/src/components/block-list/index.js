@@ -8,19 +8,19 @@ import classnames from 'classnames';
  */
 import { AsyncModeProvider, useSelect } from '@wordpress/data';
 import { useRef, createContext, useState } from '@wordpress/element';
-import { useViewportMatch, useMergeRefs } from '@wordpress/compose';
+import { useViewportMatch } from '@wordpress/compose';
 
 /**
  * Internal dependencies
  */
 import BlockListBlock from './block';
 import BlockListAppender from '../block-list-appender';
-import useBlockDropZone from '../use-block-drop-zone';
 import useInsertionPoint from './insertion-point';
 import BlockPopover from './block-popover';
 import { store as blockEditorStore } from '../../store';
 import { usePreParsePatterns } from '../../utils/pre-parse-patterns';
 import { LayoutProvider, defaultLayout } from './layout';
+import { useInnerBlocksProps } from '../inner-blocks';
 
 export const BlockNodes = createContext();
 export const SetBlockNodes = createContext();
@@ -51,30 +51,26 @@ export default function BlockList( { className, __experimentalLayout } ) {
 			isNavigationMode: _isNavigationMode(),
 		};
 	}, [] );
+	const innerBlocksProps = useInnerBlocksProps(
+		{
+			ref,
+			className: classnames( 'is-root-container', className, {
+				'is-typing': isTyping,
+				'is-outline-mode': isOutlineMode,
+				'is-focus-mode': isFocusMode && isLargeViewport,
+				'is-navigate-mode': isNavigationMode,
+			} ),
+		},
+		{ __experimentalLayout }
+	);
 
 	return (
 		<BlockNodes.Provider value={ blockNodes }>
 			{ insertionPoint }
 			<BlockPopover />
-			<div
-				ref={ useMergeRefs( [ ref, useBlockDropZone() ] ) }
-				className={ classnames(
-					'block-editor-block-list__layout is-root-container',
-					className,
-					{
-						'is-typing': isTyping,
-						'is-outline-mode': isOutlineMode,
-						'is-focus-mode': isFocusMode && isLargeViewport,
-						'is-navigate-mode': isNavigationMode,
-					}
-				) }
-			>
-				<SetBlockNodes.Provider value={ setBlockNodes }>
-					<BlockListItems
-						__experimentalLayout={ __experimentalLayout }
-					/>
-				</SetBlockNodes.Provider>
-			</div>
+			<SetBlockNodes.Provider value={ setBlockNodes }>
+				<div { ...innerBlocksProps } />
+			</SetBlockNodes.Provider>
 		</BlockNodes.Provider>
 	);
 }
