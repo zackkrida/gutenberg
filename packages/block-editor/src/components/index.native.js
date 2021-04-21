@@ -70,6 +70,7 @@ export { default as Inserter } from './inserter';
 export { useBlockProps } from './block-list/use-block-props';
 export { Block as __experimentalBlock } from './block-list/block-wrapper';
 export { default as FloatingToolbar } from './floating-toolbar';
+export { default as HeadingLevelControl } from './heading-level-control';
 
 // State Related Components
 export { default as BlockEditorProvider } from './provider';
