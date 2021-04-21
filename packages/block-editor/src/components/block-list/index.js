@@ -21,6 +21,10 @@ import { store as blockEditorStore } from '../../store';
 import { usePreParsePatterns } from '../../utils/pre-parse-patterns';
 import { LayoutProvider, defaultLayout } from './layout';
 import { useInnerBlocksProps } from '../inner-blocks';
+import {
+	BlockEditContextProvider,
+	DEFAULT_BLOCK_EDIT_CONTEXT,
+} from '../block-edit/context';
 
 export const BlockNodes = createContext();
 export const SetBlockNodes = createContext();
@@ -69,7 +73,9 @@ export default function BlockList( { className, __experimentalLayout } ) {
 			{ insertionPoint }
 			<BlockPopover />
 			<SetBlockNodes.Provider value={ setBlockNodes }>
-				<div { ...innerBlocksProps } />
+				<BlockEditContextProvider value={ DEFAULT_BLOCK_EDIT_CONTEXT }>
+					<div { ...innerBlocksProps } />
+				</BlockEditContextProvider>
 			</SetBlockNodes.Provider>
 		</BlockNodes.Provider>
 	);
