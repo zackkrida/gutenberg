@@ -30,6 +30,18 @@
 		"showSubmenuIcon": {
 			"type": "boolean",
 			"default": true
+		},
+		"overlayBackgroundColor": {
+			"type": "string"
+		},
+		"customOverlayBackgroundColor": {
+			"type": "string"
+		},
+		"overlayTextColor": {
+			"type": "string"
+		},
+		"customOverlayTextColor": {
+			"type": "string"
 		}
 	},
 	"providesContext": {
@@ -37,6 +49,10 @@
 		"customTextColor": "customTextColor",
 		"backgroundColor": "backgroundColor",
 		"customBackgroundColor": "customBackgroundColor",
+		"overlayTextColor": "overlayTextColor",
+		"customOverlayTextColor": "customOverlayTextColor",
+		"overlayBackgroundColor": "overlayBackgroundColor",
+		"customOverlayBackgroundColor": "customOverlayBackgroundColor",
 		"fontSize": "fontSize",
 		"customFontSize": "customFontSize",
 		"showSubmenuIcon": "showSubmenuIcon",
@@ -53,7 +69,6 @@
 		"__experimentalFontStyle": true,
 		"__experimentalFontWeight": true,
 		"__experimentalTextTransform": true,
-		"color": true,
 		"__experimentalFontFamily": true,
 		"__experimentalTextDecoration": true
 	},
