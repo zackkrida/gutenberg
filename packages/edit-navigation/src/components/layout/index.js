@@ -41,6 +41,7 @@ import Notices from '../notices';
 import BlockToolbar from './block-toolbar';
 import Editor from '../editor';
 import InspectorAdditions from '../inspector-additions';
+import UnsavedChangesWarning from './unsaved-changes-warning';
 import { store as editNavigationStore } from '../../store';
 
 const interfaceLabels = {
@@ -236,6 +237,7 @@ export default function Layout( { blockEditorSettings } ) {
 							/>
 						</IsMenuNameControlFocusedContext.Provider>
 					</MenuIdContext.Provider>
+					<UnsavedChangesWarning />
 				</BlockEditorProvider>
 				<Popover.Slot />
 			</SlotFillProvider>
