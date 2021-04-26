@@ -7,7 +7,7 @@ import classnames from 'classnames';
  * WordPress dependencies
  */
 import { useEntityProp } from '@wordpress/core-data';
-import { useState } from '@wordpress/element';
+import { useRef } from '@wordpress/element';
 import { __experimentalGetSettings, dateI18n } from '@wordpress/date';
 import {
 	AlignmentToolbar,
@@ -16,10 +16,10 @@ import {
 	useBlockProps,
 } from '@wordpress/block-editor';
 import {
+	Dropdown,
 	ToolbarGroup,
 	ToolbarButton,
 	ToggleControl,
-	Popover,
 	DateTimePicker,
 	PanelBody,
 	CustomSelectControl,
@@ -38,7 +38,6 @@ export default function PostDateEdit( { attributes, context, setAttributes } ) {
 		'date',
 		postId
 	);
-	const [ isPickerOpen, setIsPickerOpen ] = useState( false );
 	const settings = __experimentalGetSettings();
 	// To know if the current time format is a 12 hour time, look for "a".
 	// Also make sure this "a" is not escaped by a "/".
@@ -63,18 +62,11 @@ export default function PostDateEdit( { attributes, context, setAttributes } ) {
 		} ),
 	} );
 
+	const timeRef = useRef();
+
 	let postDate = date ? (
-		<time dateTime={ dateI18n( 'c', date ) }>
+		<time dateTime={ dateI18n( 'c', date ) } ref={ timeRef }>
 			{ dateI18n( resolvedFormat, date ) }
-			{ isPickerOpen && (
-				<Popover onClose={ setIsPickerOpen.bind( null, false ) }>
-					<DateTimePicker
-						currentDate={ date }
-						onChange={ setDate }
-						is12Hour={ is12Hour }
-					/>
-				</Popover>
-			) }
 		</time>
 	) : (
 		__( 'No Date' )
@@ -94,14 +86,23 @@ export default function PostDateEdit( { attributes, context, setAttributes } ) {
 
 				{ date && (
 					<ToolbarGroup>
-						<ToolbarButton
-							icon={ edit }
-							title={ __( 'Change Date' ) }
-							onClick={ () =>
-								setIsPickerOpen(
-									( _isPickerOpen ) => ! _isPickerOpen
-								)
-							}
+						<Dropdown
+							popoverProps={ { anchorRef: timeRef.current } }
+							renderContent={ () => (
+								<DateTimePicker
+									currentDate={ date }
+									onChange={ setDate }
+									is12Hour={ is12Hour }
+								/>
+							) }
+							renderToggle={ ( { isOpen, onToggle } ) => (
+								<ToolbarButton
+									aria-expanded={ isOpen }
+									icon={ edit }
+									title={ __( 'Change Date' ) }
+									onClick={ onToggle }
+								/>
+							) }
 						/>
 					</ToolbarGroup>
 				) }
