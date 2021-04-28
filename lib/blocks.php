@@ -163,77 +163,62 @@ function gutenberg_register_core_block_styles( $block_name ) {
 		return;
 	}
 
-	gutenberg_register_core_block_style( $block_name, 'style' );
-	gutenberg_register_core_block_style( $block_name, 'style-editor', '-editor' );
-	gutenberg_register_core_block_style( $block_name, 'style-theme', '-theme' );
-}
-
-/**
- * Registers a block style for a core block.
- *
- * @param string $block_name    The block-name.
- * @param string $file_name     The filename without filetype suffix.
- * @param string $handle_suffix A suffix to be appended to the generated stylesheet handle .
- *
- * @return void
- */
-function gutenberg_register_core_block_style( $block_name, $file_name = 'style', $handle_suffix = '' ) {
-
 	$block_name = str_replace( 'core/', '', $block_name );
-	$style_path = "build/block-library/blocks/$block_name/$file_name.css";
 
-	// Early exit if file doesn't exist.
-	if ( ! file_exists( gutenberg_dir_path() . $style_path ) ) {
-		return;
+	$style_path        = "build/block-library/blocks/$block_name/style.css";
+	$editor_style_path = "build/block-library/blocks/$block_name/style-editor.css";
+
+	if ( file_exists( gutenberg_dir_path() . $style_path ) ) {
+		wp_register_style(
+			"wp-block-{$block_name}",
+			gutenberg_url( $style_path ),
+			array(),
+			filemtime( gutenberg_dir_path() . $style_path )
+		);
+		wp_style_add_data( "wp-block-{$block_name}", 'rtl', 'replace' );
+
+		// Add a reference to the stylesheet's path to allow calculations for inlining styles in `wp_head`.
+		wp_style_add_data( "wp-block-{$block_name}", 'path', gutenberg_dir_path() . $style_path );
+
+		// If the current theme supports wp-block-styles, dequeue the full stylesheet
+		// and instead attach each block's theme-styles to their block styles stylesheet.
+		if ( current_theme_supports( 'wp-block-styles' ) ) {
+
+			// Dequeue the full stylesheet.
+			// Make sure this only runs once, it doesn't need to run for every block.
+			static $stylesheet_removed;
+			if ( ! $stylesheet_removed ) {
+				add_action(
+					'wp_enqueue_scripts',
+					function() {
+						wp_dequeue_style( 'wp-block-library-theme' );
+					}
+				);
+				$stylesheet_removed = true;
+			}
+
+			// Get the path to the block's stylesheet.
+			$theme_style_path = is_rtl()
+				? gutenberg_dir_path() . "build/block-library/blocks/$block_name/theme-rtl.css"
+				: gutenberg_dir_path() . "build/block-library/blocks/$block_name/theme.css";
+
+			// If the file exist, add its contents to the main block styles.
+			if ( file_exists( $theme_style_path ) ) {
+				wp_add_inline_style( "wp-block-{$block_name}", file_get_contents( $theme_style_path ) );
+			}
+		}
 	}
 
-	// Register stylesheet.
-	wp_register_style(
-		"wp-block-{$block_name}{$handle_suffix}",
-		gutenberg_url( $style_path ),
-		array(),
-		filemtime( gutenberg_dir_path() . $style_path )
-	);
-
-	// Add RTL styles.
-	wp_style_add_data( "wp-block-{$block_name}{$handle_suffix}", 'rtl', 'replace' );
-
-	// Add a reference to the stylesheet's path to allow calculations for inlining styles in `wp_head`.
-	wp_style_add_data( "wp-block-{$block_name}{$handle_suffix}", 'path', gutenberg_dir_path() . $style_path );
+	if ( file_exists( gutenberg_dir_path() . $editor_style_path ) ) {
+		wp_register_style(
+			"wp-block-{$block_name}-editor",
+			gutenberg_url( $editor_style_path ),
+			array(),
+			filemtime( gutenberg_dir_path() . $editor_style_path )
+		);
+		wp_style_add_data( "wp-block-{$block_name}-editor", 'rtl', 'replace' );
+	}
 }
-
-/**
- * Enqueue theme styles on block-render.
- *
- * @param string $block_content The block content about to be appended.
- * @param array  $block         The full block, including name and attributes.
- *
- * @return string Returns the block content unaltered.
- */
-function gutenberg_maybe_load_separate_theme_styles( $block_content, $block ) {
-
-	// Early exit if theme doesn't declare support.
-	if (
-		! current_theme_supports( 'wp-block-styles' ) ||
-		! gutenberg_should_load_separate_block_assets()
-	) {
-		return $block_content;
-	}
-
-	// Make sure "blockName" is defined before using it.
-	if ( ! isset( $block['blockName'] ) ) {
-		return $block_content;
-	}
-
-	// Get the block-name.
-	$block_name = str_replace( 'core/', '', $block['blockName'] );
-
-	// Enqueue stylesheet.
-	wp_enqueue_style( "wp-block-$block_name-theme" );
-
-	return $block_content;
-}
-add_filter( 'render_block', 'gutenberg_maybe_load_separate_theme_styles', 10, 2 );
 
 /**
  * Change the way styles get loaded depending on their size.
