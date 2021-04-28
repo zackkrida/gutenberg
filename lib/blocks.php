@@ -203,7 +203,7 @@ function gutenberg_register_core_block_styles( $block_name ) {
 			? "build/block-library/blocks/$block_name/theme-rtl.css"
 			: "build/block-library/blocks/$block_name/theme.css";
 
-		// If the file exist, enqueue it.
+		// If the file exists, enqueue it.
 		if ( file_exists( gutenberg_dir_path() . $theme_style_path ) ) {
 
 			if ( file_exists( gutenberg_dir_path() . $style_path ) ) {
