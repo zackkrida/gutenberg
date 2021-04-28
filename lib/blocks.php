@@ -213,6 +213,7 @@ function gutenberg_register_core_block_styles( $block_name ) {
 					file_get_contents( gutenberg_dir_path() . $theme_style_path )
 				);
 			} else {
+				// If there is no main stylesheet for this block, register theme style.
 				wp_register_style(
 					"wp-block-{$block_name}",
 					gutenberg_url( $theme_style_path ),
