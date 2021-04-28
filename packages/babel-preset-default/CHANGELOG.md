@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### New Feature
+
+-   New `dist/polyfill.js` file is available that polyfills ECMAScript features missing in the [browsers supported](https://make.wordpress.org/core/handbook/best-practices/browser-support/) by the WordPress project. It's a drop-in replacement for the deprecated `@babel/polyfill` package ([#31279](https://github.com/WordPress/gutenberg/pull/31279)).
+
 ## 5.2.0 (2021-04-06)
 
 ### Enhancements
