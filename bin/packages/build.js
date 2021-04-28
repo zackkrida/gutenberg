@@ -119,7 +119,7 @@ function createStyleEntryTransform() {
 			// block-library package also need rebuilding.
 			if (
 				packageName === 'block-library' &&
-				[ 'style.scss', 'editor.scss' ].includes(
+				[ 'style.scss', 'editor.scss', 'theme.scss' ].includes(
 					path.basename( file )
 				)
 			) {
