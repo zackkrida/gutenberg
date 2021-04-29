@@ -32,7 +32,6 @@ import NavigationSidebar from '../navigation-sidebar';
 import URLQueryController from '../url-query-controller';
 import InserterSidebar from '../secondary-sidebar/inserter-sidebar';
 import ListViewSidebar from '../secondary-sidebar/list-view-sidebar';
-import WelcomeGuide from '../welcome-guide';
 import { store as editSiteStore } from '../../store';
 
 const interfaceLabels = {
@@ -251,7 +250,6 @@ function Editor( { initialSettings } ) {
 										}
 										footer={ <BlockBreadcrumb /> }
 									/>
-									<WelcomeGuide />
 									<Popover.Slot />
 									<PluginArea />
 								</GlobalStylesProvider>
