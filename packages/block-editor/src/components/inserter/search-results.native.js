@@ -90,16 +90,11 @@ function InserterSearchResults( {
 		return (
 			<View>
 				<View
-					style={ [
+					style={
 						styles[
 							'inserter-search-results__no-results-container'
-						],
-						{
-						//	flex: 0,
-							marginTop: 60,
-							alignItems: 'center',
-						},
-					] }
+						]
+					}
 				>
 					<Text style={ primaryTextStyle }>
 						{ __( 'No blocks found' ) }
