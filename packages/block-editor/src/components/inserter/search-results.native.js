@@ -4,6 +4,7 @@
 import {
 	FlatList,
 	View,
+	Text,
 	TouchableHighlight,
 	TouchableWithoutFeedback,
 	Dimensions,
@@ -14,6 +15,8 @@ import {
  */
 import { useState, useEffect } from '@wordpress/element';
 import { BottomSheet, InserterButton } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+import { usePreferredColorSchemeStyle } from '@wordpress/compose';
 
 /**
  * Internal dependencies
@@ -32,6 +35,15 @@ function InserterSearchResults( {
 	const [ numberOfColumns, setNumberOfColumns ] = useState( MIN_COL_NUM );
 	const [ itemWidth, setItemWidth ] = useState();
 	const [ maxWidth, setMaxWidth ] = useState();
+
+	const primaryTextStyle = usePreferredColorSchemeStyle(
+		styles[ 'inserter-search-results__no-results-text-primary' ],
+		styles[ 'inserter-search-results__no-results-text-primary--dark' ]
+	);
+	const secondaryTextStyle = usePreferredColorSchemeStyle(
+		styles[ 'inserter-search-results__no-results-text-secondary' ],
+		styles[ 'inserter-search-results__no-results-text-secondary--dark' ]
+	);
 
 	useEffect( () => {
 		Dimensions.addEventListener( 'change', onLayout );
@@ -72,6 +84,27 @@ function InserterSearchResults( {
 				( bottomSheetWidth - 2 * sumLeftRightPadding ) / MIN_COL_NUM;
 			setItemWidth( updatedItemWidth );
 		}
+	}
+
+	if ( items?.length === 0 ) {
+		return (
+			<View>
+				<View
+					style={
+						styles[
+							'inserter-search-results__no-results-container'
+						]
+					}
+				>
+					<Text style={ primaryTextStyle }>
+						{ __( 'No blocks found' ) }
+					</Text>
+					<Text style={ secondaryTextStyle }>
+						{ __( 'Try another search term' ) }
+					</Text>
+				</View>
+			</View>
+		);
 	}
 
 	return (

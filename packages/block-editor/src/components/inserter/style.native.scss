@@ -86,3 +86,27 @@
 .inserter-search-form__input-button-right {
 	margin: 0 12px;
 }
+
+.inserter-search-results__no-results-container {
+	margin-top: 60px;
+	align-items: center;
+}
+
+.inserter-search-results__no-results-text-primary {
+	font-size: 16px;
+	color: $light-primary;
+}
+
+.inserter-search-results__no-results-text-primary--dark {
+	font-size: 16px;
+	color: $dark-primary;
+}
+
+.inserter-search-results__no-results-text-secondary {
+	font-size: 14px;
+	color: $light-secondary;
+}
+
+.inserter-search-results__no-results-text-secondary--dark {
+	color: $dark-secondary;
+}
