@@ -146,12 +146,12 @@ function nest_pages( $current_level, $children ) {
  * @return string Returns the page list markup.
  */
 function render_block_core_page_list( $attributes, $content, $block ) {
-	global $post; // ??
+	global $post;
 	static $block_id = 0;
 	$block_id++;
 
+	$children_only = ( isset( $attributes['childrenOnly'] ) && $attributes['childrenOnly'] );
 
-	$childrenOnly = ( isset( $attributes['childrenOnly'] ) && $attributes['childrenOnly'] );
 	$parent_id = ( $post->post_parent ) ? $post->post_parent : $post->ID;
 
 	// TODO: When https://core.trac.wordpress.org/ticket/39037 REST API support for multiple orderby values is resolved,
@@ -164,7 +164,7 @@ function render_block_core_page_list( $attributes, $content, $block ) {
 		'order'       => 'asc',
 	);
 
-	if ( $childrenOnly ) {
+	if ( $children_only ) {
 		$query_args['child_of'] = $parent_id;
 	}
 
@@ -175,8 +175,8 @@ function render_block_core_page_list( $attributes, $content, $block ) {
 	$pages_with_children = array();
 
 	foreach ( (array) $all_pages as $page ) {
-		if ( ( $page->post_parent && !$childrenOnly ) ||
-			( $childrenOnly && $page->post_parent !== $parent_id ) ) {
+		if ( ( $page->post_parent && ! $children_only ) ||
+			( $children_only && $page->post_parent !== $parent_id ) ) {
 			$pages_with_children[ $page->post_parent ][ $page->ID ] = array(
 				'title' => $page->post_title,
 				'link'  => get_permalink( $page->ID ),
