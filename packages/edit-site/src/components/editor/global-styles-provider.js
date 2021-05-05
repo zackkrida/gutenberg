@@ -205,9 +205,7 @@ export default function GlobalStylesProvider( { children, baseStyles } ) {
 				setContent( JSON.stringify( newContent ) );
 			},
 			getStyle: ( context, propertyName, origin = 'merged' ) => {
-				const propertyPath =
-					STYLE_PROPERTY[ propertyName ].valueGlobal ??
-					STYLE_PROPERTY[ propertyName ].value;
+				const propertyPath = STYLE_PROPERTY[ propertyName ].value;
 				const path =
 					context === ROOT_BLOCK_NAME
 						? propertyPath
@@ -237,9 +235,7 @@ export default function GlobalStylesProvider( { children, baseStyles } ) {
 					ROOT_BLOCK_NAME === context
 						? [ 'styles' ]
 						: [ 'styles', 'blocks', context ];
-				const propertyPath =
-					STYLE_PROPERTY[ propertyName ].valueGlobal ??
-					STYLE_PROPERTY[ propertyName ].value;
+				const propertyPath = STYLE_PROPERTY[ propertyName ].value;
 
 				let newStyles = get( newContent, path );
 				if ( ! newStyles ) {
