@@ -2,7 +2,7 @@
  * External dependencies
  */
 import classnames from 'classnames';
-import { isObject } from 'lodash';
+import { isObject, setWith, clone } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -304,15 +304,14 @@ export function ColorEdit( props ) {
 	const onChangeLinkColor = ( value ) => {
 		const colorObject = getColorObjectByColorValue( colors, value );
 		props.setAttributes( {
-			style: {
-				...props.attributes.style,
-				color: {
-					...props.attributes.style?.color,
-					link: colorObject?.slug
-						? `var:preset|color|${ colorObject.slug }`
-						: value,
-				},
-			},
+			style: setWith(
+				clone( props.attributes.style ),
+				[ 'elements', 'link', 'color', 'text' ],
+				colorObject?.slug
+					? `var:preset|color|${ colorObject.slug }`
+					: value,
+				clone
+			),
 		} );
 	};
 
@@ -363,10 +362,10 @@ export function ColorEdit( props ) {
 								onColorChange: onChangeLinkColor,
 								colorValue: getLinkColorFromAttributeValue(
 									colors,
-									style?.color?.link
+									style?.elements?.link?.color?.text
 								),
-								clearable: !! props.attributes.style?.color
-									?.link,
+								clearable: !! style?.elements?.link?.color
+									?.text,
 							},
 					  ]
 					: [] ),
