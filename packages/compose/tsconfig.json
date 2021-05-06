@@ -4,10 +4,16 @@
 		"rootDir": "src",
 		"declarationDir": "build-types"
 	},
+	"references": [
+		{ "path": "../element" },
+		{ "path": "../dom" },
+		{ "path": "../keycodes" }
+	],
 	"include": [
 		"src/higher-order/if-condition/**/*",
 		"src/higher-order/pure/**/*",
 		"src/higher-order/with-instance-id/**/*",
+		"src/hooks/use-constrained-tabbing/**/*",
 		"src/hooks/use-instance-id/**/*",
 		"src/utils/**/*"
 	]
