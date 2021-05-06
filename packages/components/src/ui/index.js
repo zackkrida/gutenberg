@@ -7,4 +7,3 @@ export * from './form-group';
 export * from './grid';
 export * from './shortcut';
 export * from './spinner';
-export * from './view';

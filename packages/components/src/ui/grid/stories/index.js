@@ -6,7 +6,7 @@ import { number } from '@storybook/addon-knobs';
 /**
  * Internal dependencies
  */
-import { View } from '../../view';
+import { View } from '../../../view';
 import { Grid } from '..';
 
 export default {
