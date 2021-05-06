@@ -20,14 +20,27 @@ function render_block_core_site_title( $attributes ) {
 		$tag_name = 0 === $attributes['level'] ? 'p' : 'h' . $attributes['level'];
 	}
 
-	$link               = sprintf( '<a href="%1$s" rel="home">%2$s</a>', get_bloginfo( 'url' ), get_bloginfo( 'name' ) );
+	if ( $attributes['isLink'] && '_blank' === $attributes['linkTarget'] ) {
+		$title = sprintf(
+			'<a href="%1$s" rel="home" target="%2$s" aria-label="%3$s">%4$s</a>',
+			get_bloginfo( 'url' ),
+			$attributes['linkTarget'],
+			esc_attr__( '(opens in a new tab)' ),
+			get_bloginfo( 'name' )
+		);
+	} elseif ( $attributes['isLink'] ) {
+		$title = sprintf( '<a href="%1$s" rel="home">%2$s</a>', get_bloginfo( 'url' ), get_bloginfo( 'name' ) );
+	} else {
+		$title = get_bloginfo( 'name' );
+	}
+
 	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => $align_class_name ) );
 
 	return sprintf(
 		'<%1$s %2$s>%3$s</%1$s>',
 		$tag_name,
 		$wrapper_attributes,
-		$link
+		$title
 	);
 }
 

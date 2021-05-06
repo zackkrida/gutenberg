@@ -11,9 +11,11 @@ import { __ } from '@wordpress/i18n';
 import {
 	RichText,
 	AlignmentControl,
+	InspectorControls,
 	BlockControls,
 	useBlockProps,
 } from '@wordpress/block-editor';
+import { ToggleControl, PanelBody } from '@wordpress/components';
 import { createBlock, getDefaultBlockName } from '@wordpress/blocks';
 
 /**
@@ -26,7 +28,7 @@ export default function SiteTitleEdit( {
 	setAttributes,
 	insertBlocksAfter,
 } ) {
-	const { level, textAlign } = attributes;
+	const { level, textAlign, isLink, linkTarget } = attributes;
 	const [ title, setTitle ] = useEntityProp( 'root', 'site', 'title' );
 	const TagName = level === 0 ? 'p' : `h${ level }`;
 	const blockProps = useBlockProps( {
@@ -34,6 +36,45 @@ export default function SiteTitleEdit( {
 			[ `has-text-align-${ textAlign }` ]: textAlign,
 		} ),
 	} );
+
+	let titleElement = (
+		<RichText
+			style={ { display: 'inline-block' } }
+			aria-label={ __( 'Site title text') }
+			placeholder={ __('Write site title…') }
+			value={ title }
+			onChange={ setTitle }
+			allowedFormats={ [] }
+			disableLineBreaks
+			__unstableOnSplitAtEnd={ () =>
+				insertBlocksAfter(
+					createBlock( getDefaultBlockName() )
+				)
+			}
+		/>
+	);
+
+	if ( isLink ) {
+		titleElement = (
+			<RichText
+				tagName="a"
+				href="#site-title-pseudo-link"
+				style={ { display: 'inline-block' } }
+				aria-label={ __( 'Site title text' ) }
+				placeholder={ __( 'Write site title…' ) }
+				value={ title }
+				onChange={ setTitle }
+				allowedFormats={ [] }
+				disableLineBreaks
+				__unstableOnSplitAtEnd={ () =>
+					insertBlocksAfter(
+						createBlock( getDefaultBlockName() )
+					)
+				}
+			/>
+		);
+	}
+
 	return (
 		<>
 			<BlockControls group="block">
@@ -50,22 +91,30 @@ export default function SiteTitleEdit( {
 					} }
 				/>
 			</BlockControls>
+			<InspectorControls>
+				<PanelBody title={ __( 'Link settings' ) }>
+					<ToggleControl
+						label={ __( 'Make title a link to home' ) }
+						onChange={ () => setAttributes( { isLink: ! isLink } ) }
+						checked={ isLink }
+					/>
+					{ isLink && (
+						<>
+							<ToggleControl
+								label={ __( 'Open in new tab' ) }
+								onChange={ ( value ) =>
+									setAttributes( {
+										linkTarget: value ? '_blank' : '_self',
+									} )
+								}
+								checked={ linkTarget === '_blank' }
+							/>
+						</>
+					) }
+				</PanelBody>
+			</InspectorControls>
 			<TagName { ...blockProps }>
-				<RichText
-					tagName="a"
-					style={ { display: 'inline-block' } }
-					aria-label={ __( 'Site title text' ) }
-					placeholder={ __( 'Write site title…' ) }
-					value={ title }
-					onChange={ setTitle }
-					allowedFormats={ [] }
-					disableLineBreaks
-					__unstableOnSplitAtEnd={ () =>
-						insertBlocksAfter(
-							createBlock( getDefaultBlockName() )
-						)
-					}
-				/>
+				{ titleElement }
 			</TagName>
 		</>
 	);
