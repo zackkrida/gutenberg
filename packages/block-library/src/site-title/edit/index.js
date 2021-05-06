@@ -40,16 +40,14 @@ export default function SiteTitleEdit( {
 	let titleElement = (
 		<RichText
 			style={ { display: 'inline-block' } }
-			aria-label={ __( 'Site title text') }
-			placeholder={ __('Write site title…') }
+			aria-label={ __( 'Site title text' ) }
+			placeholder={ __( 'Write site title…' ) }
 			value={ title }
 			onChange={ setTitle }
 			allowedFormats={ [] }
 			disableLineBreaks
 			__unstableOnSplitAtEnd={ () =>
-				insertBlocksAfter(
-					createBlock( getDefaultBlockName() )
-				)
+				insertBlocksAfter( createBlock( getDefaultBlockName() ) )
 			}
 		/>
 	);
@@ -67,9 +65,7 @@ export default function SiteTitleEdit( {
 				allowedFormats={ [] }
 				disableLineBreaks
 				__unstableOnSplitAtEnd={ () =>
-					insertBlocksAfter(
-						createBlock( getDefaultBlockName() )
-					)
+					insertBlocksAfter( createBlock( getDefaultBlockName() ) )
 				}
 			/>
 		);
