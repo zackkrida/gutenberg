@@ -109,9 +109,7 @@ export default function SiteTitleEdit( {
 					) }
 				</PanelBody>
 			</InspectorControls>
-			<TagName { ...blockProps }>
-				{ titleElement }
-			</TagName>
+			<TagName { ...blockProps }> { titleElement } </TagName>
 		</>
 	);
 }
