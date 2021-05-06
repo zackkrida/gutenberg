@@ -18,7 +18,7 @@ import {
 	BlockEditorKeyboardShortcuts,
 	__unstableBlockSettingsMenuFirstItem,
 } from '@wordpress/block-editor';
-import { SlotFillProvider, Popover } from '@wordpress/components';
+import { Popover } from '@wordpress/components';
 import { uploadMedia } from '@wordpress/media-utils';
 
 /**
@@ -59,63 +59,50 @@ export default function SidebarBlockEditor( {
 			mediaUpload: mediaUploadBlockEditor,
 		};
 	}, [ hasUploadPermissions, blockEditorSettings ] );
-	const parentContainer = document.getElementById(
-		'customize-theme-controls'
-	);
 
 	return (
 		<>
 			<BlockEditorKeyboardShortcuts.Register />
-			<SlotFillProvider>
-				<SidebarEditorProvider
-					sidebar={ sidebar }
-					settings={ settings }
-				>
-					<BlockEditorKeyboardShortcuts />
 
-					<Header
-						inserter={ inserter }
-						isInserterOpened={ isInserterOpened }
-						setIsInserterOpened={ setIsInserterOpened }
+			<SidebarEditorProvider sidebar={ sidebar } settings={ settings }>
+				<BlockEditorKeyboardShortcuts />
+
+				<Header
+					inserter={ inserter }
+					isInserterOpened={ isInserterOpened }
+					setIsInserterOpened={ setIsInserterOpened }
+				/>
+
+				<div className="customize-widgets__contextual-toolbar-wrapper">
+					<Popover.Slot name="block-toolbar" />
+				</div>
+
+				<BlockSelectionClearer>
+					<WritingFlow>
+						<ObserveTyping>
+							<BlockList />
+						</ObserveTyping>
+					</WritingFlow>
+				</BlockSelectionClearer>
+
+				{ createPortal(
+					// This is a temporary hack to prevent button component inside <BlockInspector>
+					// from submitting form when type="button" is not specified.
+					<form onSubmit={ ( event ) => event.preventDefault() }>
+						<BlockInspector />
+					</form>,
+					inspector.contentContainer[ 0 ]
+				) }
+			</SidebarEditorProvider>
+
+			<__unstableBlockSettingsMenuFirstItem>
+				{ ( { onClose } ) => (
+					<BlockInspectorButton
+						inspector={ inspector }
+						closeMenu={ onClose }
 					/>
-
-					<div className="customize-widgets__contextual-toolbar-wrapper">
-						<Popover.Slot name="block-toolbar" />
-					</div>
-
-					<BlockSelectionClearer>
-						<WritingFlow>
-							<ObserveTyping>
-								<BlockList />
-							</ObserveTyping>
-						</WritingFlow>
-					</BlockSelectionClearer>
-
-					{ createPortal(
-						// This is a temporary hack to prevent button component inside <BlockInspector>
-						// from submitting form when type="button" is not specified.
-						<form onSubmit={ ( event ) => event.preventDefault() }>
-							<BlockInspector />
-						</form>,
-						inspector.contentContainer[ 0 ]
-					) }
-				</SidebarEditorProvider>
-
-				<__unstableBlockSettingsMenuFirstItem>
-					{ ( { onClose } ) => (
-						<BlockInspectorButton
-							inspector={ inspector }
-							closeMenu={ onClose }
-						/>
-					) }
-				</__unstableBlockSettingsMenuFirstItem>
-
-				{
-					// We have to portal this to the parent of both the editor and the inspector,
-					// so that the popovers will appear above both of them.
-					createPortal( <Popover.Slot />, parentContainer )
-				}
-			</SlotFillProvider>
+				) }
+			</__unstableBlockSettingsMenuFirstItem>
 		</>
 	);
 }
